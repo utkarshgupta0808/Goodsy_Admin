@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "316520651932",
+    "firebase_url": "https://goodsy-da8cc.firebaseio.com",
+    "project_id": "goodsy-da8cc",
+    "storage_bucket": "goodsy-da8cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316520651932:android:0276dae927870d07576159",
+        "android_client_info": {
+          "package_name": "com.goodsy.goodsyadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316520651932-f69n91cjmo0p5pk09emntaob0hntfpj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7uzxZHNTtbpMrzyflN8v8u-HCBXbpPR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316520651932-f69n91cjmo0p5pk09emntaob0hntfpj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316520651932:android:d395650f916e58ce576159",
+        "android_client_info": {
+          "package_name": "com.goodsy.store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316520651932-govapdvdruopd7ig7lt4j8ei3a69depi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.goodsy.store",
+            "certificate_hash": "7fb9e872e014f6ca7144f3063318ce683becba77"
+          }
+        },
+        {
+          "client_id": "316520651932-f69n91cjmo0p5pk09emntaob0hntfpj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7uzxZHNTtbpMrzyflN8v8u-HCBXbpPR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316520651932-f69n91cjmo0p5pk09emntaob0hntfpj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
