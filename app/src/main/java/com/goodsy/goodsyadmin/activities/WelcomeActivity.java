@@ -77,7 +77,7 @@ public class WelcomeActivity extends AppCompatActivity {
         shopList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentShop=new Intent(WelcomeActivity.this,ShopActivity.class);
+                Intent intentShop=new Intent(WelcomeActivity.this, ShopListActivity.class);
                 startActivity(intentShop);
                 finish();
 

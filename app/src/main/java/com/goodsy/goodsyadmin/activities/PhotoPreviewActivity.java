@@ -6,33 +6,47 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.goodsy.goodsyadmin.R;
 
-public class ItemListActivity extends AppCompatActivity {
+public class PhotoPreviewActivity extends AppCompatActivity {
 
-    ImageView btnBack;
+    ImageView photoPreview, btnBack;
+    TextView photoDes;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_list);
+        setContentView(R.layout.activity_photo_preview);
 
+        photoDes=findViewById(R.id.photo_des);
+        photoPreview=findViewById(R.id.photo_preview);
         btnBack=findViewById(R.id.btn_back);
+
+        bundle=getIntent().getExtras();
+
+        Glide.with(this).load(bundle.getString("photoPreview")).into(photoPreview);
+        photoDes.setText(bundle.getString("photoDes"));
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ItemListActivity.this,WelcomeActivity.class));
+
                 finish();
             }
         });
+
+
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ItemListActivity.this,WelcomeActivity.class));
+
         finish();
     }
 }
