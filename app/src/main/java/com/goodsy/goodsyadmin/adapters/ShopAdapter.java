@@ -69,7 +69,7 @@ public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter
             @Override
             public void onClick(View view) {
                 FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
-                firebaseFirestore.collection("ShopKeeper").document("OX2R3c32NRgkzE5PBGiXW2moMtO2").get()
+                firebaseFirestore.collection("ShopKeeper").document(model.getShopKeeperId()).get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
