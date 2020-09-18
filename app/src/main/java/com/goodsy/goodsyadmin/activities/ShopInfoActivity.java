@@ -23,6 +23,8 @@ public class ShopInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_info);
 
+
+
         btnBack=findViewById(R.id.btn_back);
         shopAddress=findViewById(R.id.shop_address);
         shopCategory=findViewById(R.id.shop_category);
@@ -33,7 +35,7 @@ public class ShopInfoActivity extends AppCompatActivity {
         shopName=findViewById(R.id.shop_name);
         ownerCity=findViewById(R.id.owner_city);
         ownerEmail=findViewById(R.id.owner_mail);
-        ownerName=findViewById(R.id.owner_name);
+        ownerName=findViewById(R.id.owner_n);
         ownerNumber=findViewById(R.id.owner_number);
         aadhaarBack=findViewById(R.id.aadhaar_back);
         aadhaarFront=findViewById(R.id.aadhaar_front);
@@ -50,10 +52,10 @@ public class ShopInfoActivity extends AppCompatActivity {
         shopDes.setText(bundle.getString("shopDes"));
         shopCategory.setText(bundle.getString("shopCategory"));
         shopAddress.setText(bundle.getString("shopAddress"));
-        ownerNumber.setText(bundle.getString("ownerNumber"));
+        ownerNumber.setText(bundle.getString("ownerPhone"));
         ownerName.setText(bundle.getString("ownerName"));
         ownerEmail.setText(bundle.getString("ownerEmail"));
-        ownerCity.setText(bundle.getString("ownerCity"));
+        ownerCity.setText(bundle.getString("ownerAddress"));
 
         Glide.with(this).load(bundle.getString("shopImage")).into(shopImage);
         Glide.with(this).load(bundle.getString("panCard")).into(panCard);

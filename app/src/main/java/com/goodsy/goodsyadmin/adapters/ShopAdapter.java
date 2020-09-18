@@ -68,26 +68,11 @@ public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter
         holder.cardViewLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
-                firebaseFirestore.collection("ShopKeeper").document(model.getShopKeeperId()).get()
-                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                                bundle.putString("ownerName",documentSnapshot.get("ownerName").toString());
-                                bundle.putString("ownerPhone",documentSnapshot.get("ownerNumber").toString());
-                                bundle.putString("ownerEmail",documentSnapshot.get("ownerEmail").toString());
-                                bundle.putString("ownerAddress",documentSnapshot.get("ownerCity").toString());
 
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(holder.cardViewLayout.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    }
-                });
 
+                
                 bundle.putString("shopImage",model.getShopImage());
                 bundle.putString("shopName",model.getShopName());
                 bundle.putString("shopDes",model.getShopType());
@@ -99,8 +84,31 @@ public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter
                 bundle.putString("aadhaarBack",model.getAadharBack());
                 bundle.putString("shopLongitude",model.getShopLongitude());
                 bundle.putString("shopLatitude",model.getShopLatitude());
+                bundle.putString("shopKeeperId",model.getShopKeeperId());
 
-                holder.cardViewPhoto.getContext().startActivity(new Intent(holder.cardViewPhoto.getContext(), ShopInfoActivity.class).putExtras(bundle));
+
+
+                FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+                firebaseFirestore.collection("ShopKeeper").document(model.getShopKeeperId()).get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                bundle.putString("ownerName",documentSnapshot.get("ownerName").toString());
+                                bundle.putString("ownerPhone",documentSnapshot.get("ownerNumber").toString());
+                                bundle.putString("ownerEmail",documentSnapshot.get("ownerEmail").toString());
+                                bundle.putString("ownerAddress",documentSnapshot.get("ownerCity").toString());
+
+                                holder.cardViewPhoto.getContext().startActivity(new Intent(holder.cardViewPhoto.getContext(), ShopInfoActivity.class).putExtras(bundle));
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(holder.cardViewLayout.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
 
 
 

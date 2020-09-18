@@ -57,17 +57,9 @@
         android:textColor="#000000"
         android:text="Shop name"
         android:gravity="center"
-        android:textSize="25sp"/>
+        android:textStyle="bold"
+        android:textSize="35sp"/>
 
-    <TextView
-        android:id="@+id/shop_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="30dp"
-        android:text="Shop Category"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="15sp" />
 
 
     <ScrollView
@@ -81,6 +73,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shop Category     :"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/shop_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Shop Category"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
 
 
 
@@ -88,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
@@ -121,7 +139,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Shop Address :     "
+                    android:text="Shop Address      :"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
@@ -148,7 +166,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Shop Longitude :  "
+                    android:text="Shop Longitude   :"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
@@ -174,7 +192,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Shop Latitude :     "
+                    android:text="Shop Latitude      :"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
@@ -195,7 +213,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:text="Documents"
+                android:text="Documents :"
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -283,7 +301,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:text="Shopkeeper Details"
+                android:text="Shopkeeper Details :"
                 android:textColor="#000000"
                 android:textSize="18sp"/>
 
@@ -291,7 +309,7 @@
 
 
                 <TextView
-                    android:id="@+id/owner_name"
+                    android:id="@+id/owner_n"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
