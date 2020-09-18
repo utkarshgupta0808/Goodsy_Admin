@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -20,6 +21,10 @@ import com.goodsy.goodsyadmin.R;
 import com.goodsy.goodsyadmin.activities.PhotoPreviewActivity;
 import com.goodsy.goodsyadmin.activities.ShopInfoActivity;
 import com.goodsy.goodsyadmin.models.ShopModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter.MyViewHolder>  {
 
@@ -63,18 +68,37 @@ public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter
         holder.cardViewLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+                firebaseFirestore.collection("ShopKeeper").document("OX2R3c32NRgkzE5PBGiXW2moMtO2").get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                bundle.putString("ownerName",documentSnapshot.get("ownerName").toString());
+                                bundle.putString("ownerPhone",documentSnapshot.get("ownerNumber").toString());
+                                bundle.putString("ownerEmail",documentSnapshot.get("ownerEmail").toString());
+                                bundle.putString("ownerAddress",documentSnapshot.get("ownerCity").toString());
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(holder.cardViewLayout.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
 
                 bundle.putString("shopImage",model.getShopImage());
                 bundle.putString("shopName",model.getShopName());
                 bundle.putString("shopDes",model.getShopType());
                 bundle.putString("shopCategory",model.getShopCategory());
                 bundle.putString("shopAddress",model.getShopAddress());
-                bundle.putString("aadhaarCardFront",model.getShopImage());
-                bundle.putString("panCard",model.getShopImage());
-                bundle.putString("gstCertificate",model.getShopImage());
-                bundle.putString("aadhaarCardBack",model.getShopImage());
-                bundle.putString("shopLongitude",model.getShopImage());
-                bundle.putString("shopLattitude",model.getShopImage());
+                bundle.putString("aadhaarFront",model.getAadharFront());
+                bundle.putString("panCard",model.getPanCard());
+                bundle.putString("gstCertificate",model.getGst());
+                bundle.putString("aadhaarBack",model.getAadharBack());
+                bundle.putString("shopLongitude",model.getShopLongitude());
+                bundle.putString("shopLatitude",model.getShopLatitude());
 
                 holder.cardViewPhoto.getContext().startActivity(new Intent(holder.cardViewPhoto.getContext(), ShopInfoActivity.class).putExtras(bundle));
 
