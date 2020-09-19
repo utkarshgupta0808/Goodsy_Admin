@@ -9,7 +9,19 @@ public class ShopModel {
     String shopKeeperId;
     String shopName;
     String shopStatusBackground;
-    String shopType, shopLongitude, shopLatitude, aadharFront, aadharBack, panCard, gst;
+    String shopType;
+    String shopLongitude;
+    String shopLatitude;
+    String aadharFront;
+    String aadharBack;
+    String panCard;
+    String gst;
+
+    public String getApplicationStatus() {
+        return applicationStatus;
+    }
+
+    String applicationStatus;
 
     public String getShopLongitude() {
         return shopLongitude;
@@ -80,7 +92,7 @@ public class ShopModel {
         return shopType;
     }
 
-    public ShopModel(Boolean reviewStatus, Boolean shopFeatured, String shopCategory, String shopAddress, String shopArrange, String shopKeeperId, String shopName, String shopStatusBackground, String shopType, String shopImage, String shopLongitude, String shopLatitude, String aadharFront, String aadharBack, String panCard, String gst) {
+    public ShopModel(Boolean reviewStatus, Boolean shopFeatured, String shopCategory, String shopAddress, String shopArrange, String shopKeeperId, String shopName, String shopStatusBackground, String shopType, String shopImage, String shopLongitude, String shopLatitude, String aadharFront, String aadharBack, String panCard, String gst, String applicationStatus) {
         this.reviewStatus = reviewStatus;
         this.shopFeatured = shopFeatured;
         this.shopCategory = shopCategory;
@@ -97,7 +109,7 @@ public class ShopModel {
         this.panCard=panCard;
         this.shopLatitude=shopLatitude;
         this.shopLongitude=shopLongitude;
-
+        this.applicationStatus=applicationStatus;
 
     }
 }

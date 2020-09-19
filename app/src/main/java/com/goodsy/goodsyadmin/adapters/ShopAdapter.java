@@ -72,7 +72,7 @@ public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter
 
 
 
-                
+
                 bundle.putString("shopImage",model.getShopImage());
                 bundle.putString("shopName",model.getShopName());
                 bundle.putString("shopDes",model.getShopType());
@@ -85,6 +85,7 @@ public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter
                 bundle.putString("shopLongitude",model.getShopLongitude());
                 bundle.putString("shopLatitude",model.getShopLatitude());
                 bundle.putString("shopKeeperId",model.getShopKeeperId());
+                bundle.putString("applicationStatus",model.getApplicationStatus());
 
 
 

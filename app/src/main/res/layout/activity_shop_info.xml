@@ -293,7 +293,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorPrimaryDark"/>
+                android:background="#151515"/>
 
             <TextView
 
@@ -348,7 +348,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginEnd="10dp"
                     android:orientation="horizontal">
 
@@ -372,7 +372,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="2dp"
                         android:layout_marginEnd="10dp"
                         android:orientation="horizontal">
 
@@ -394,16 +394,38 @@
 
                     </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/accept_shop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cornerRadius="10dp"
+                    android:text="Accept"
+                    android:backgroundTint="@color/colorPrimary"
+                    app:rippleColor="#B1B52F"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reject_shop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reject"
+                    app:cornerRadius="10dp"
+                    android:layout_marginStart="20dp"
+                    android:backgroundTint="#9BBA11"
+                    app:rippleColor="@color/colorPrimary"/>
+
+            </LinearLayout>
+
+
+
                 </LinearLayout>
-
-
-
-
-
-
-
-
-
 
 
     </ScrollView>

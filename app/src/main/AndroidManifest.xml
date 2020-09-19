@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ShopInfoActivity"></activity>
+        <activity android:name=".activities.RejectedShopsActivity"></activity>
+        <activity android:name=".activities.AcceptedShopsActivity" />
+        <activity android:name=".activities.ShopInfoActivity" />
         <activity android:name=".activities.PhotoPreviewActivity" />
         <activity android:name=".activities.ItemListActivity" />
         <activity android:name=".activities.ShopListActivity" />

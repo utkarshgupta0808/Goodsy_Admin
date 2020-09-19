@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.ItemListActivity">
+    tools:context=".activities.AcceptedShopsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -40,7 +40,22 @@
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
-    
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="All Accepted Shops"
+        android:textColor="#000000"
+        android:textStyle="italic"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shop__accepted_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"/>
 
 
 </LinearLayout>

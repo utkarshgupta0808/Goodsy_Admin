@@ -20,7 +20,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     ImageView btnLogout;
-    TextView shopList, itemList;
+    TextView shopList, itemList, shopAcceptedList, shopRejectedList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,8 @@ public class WelcomeActivity extends AppCompatActivity {
         shopList=findViewById(R.id.shops_list);
         itemList=findViewById(R.id.items_list);
         btnLogout=findViewById(R.id.btn_logout);
+        shopAcceptedList=findViewById(R.id.shops_list_accepted);
+        shopRejectedList=findViewById(R.id.shops_list_rejected);
 
         itemList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +80,26 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentShop=new Intent(WelcomeActivity.this, ShopListActivity.class);
+                startActivity(intentShop);
+                finish();
+
+            }
+        });
+
+        shopAcceptedList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentShop=new Intent(WelcomeActivity.this, AcceptedShopsActivity.class);
+                startActivity(intentShop);
+                finish();
+
+            }
+        });
+
+        shopRejectedList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentShop=new Intent(WelcomeActivity.this, RejectedShopsActivity.class);
                 startActivity(intentShop);
                 finish();
 

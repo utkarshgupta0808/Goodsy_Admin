@@ -16,24 +16,25 @@ import com.goodsy.goodsyadmin.models.ShopModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class ShopListActivity extends AppCompatActivity {
+public class RejectedShopsActivity extends AppCompatActivity {
 
     ImageView btnBack;
     RecyclerView recyclerView;
     FirebaseFirestore firebaseFirestore;
     ShopAdapter shopAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop_list);
+        setContentView(R.layout.activity_rejected_shops);
 
         btnBack=findViewById(R.id.btn_back);
-        recyclerView=findViewById(R.id.shop_recycler);
+        recyclerView=findViewById(R.id.shop__accepted_recycler);
 
         firebaseFirestore= FirebaseFirestore.getInstance();
 
-        Query query= firebaseFirestore.collection("ShopsMain").whereEqualTo("applicationStatus","under");
+        Query query= firebaseFirestore.collection("ShopsMain").whereEqualTo("applicationStatus","reject");
         FirestoreRecyclerOptions<ShopModel> options= new FirestoreRecyclerOptions.Builder<ShopModel>()
                 .setQuery(query, ShopModel.class).build();
         shopAdapter=new ShopAdapter(options);
@@ -46,7 +47,7 @@ public class ShopListActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ShopListActivity.this,WelcomeActivity.class));
+                startActivity(new Intent(RejectedShopsActivity.this,WelcomeActivity.class));
                 finish();
             }
         });

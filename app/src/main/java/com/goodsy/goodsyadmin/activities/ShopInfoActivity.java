@@ -1,15 +1,25 @@
 package com.goodsy.goodsyadmin.activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.goodsy.goodsyadmin.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class ShopInfoActivity extends AppCompatActivity {
 
@@ -17,6 +27,9 @@ public class ShopInfoActivity extends AppCompatActivity {
     Bundle bundle;
     TextView shopName, shopDes, shopCategory, shopAddress, shopLongitude, shopLatitude, ownerName, ownerNumber, ownerCity, ownerEmail;
     ImageView aadhaarFront, aadhaarBack, panCard, gstCertificate, shopImage;
+    Button acceptShop, rejectShop;
+    FirebaseFirestore firebaseFirestore;
+    DocumentReference documentReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +54,20 @@ public class ShopInfoActivity extends AppCompatActivity {
         aadhaarFront=findViewById(R.id.aadhaar_front);
         gstCertificate=findViewById(R.id.gst_certificate);
         panCard=findViewById(R.id.pan_card);
+        acceptShop=findViewById(R.id.accept_shop);
+        rejectShop=findViewById(R.id.reject_shop);
 
 
         bundle=getIntent().getExtras();
+        firebaseFirestore=FirebaseFirestore.getInstance();
 
+        if (bundle.getString("applicationStatus").equals("accept") || bundle.getString("applicationStatus").equals("reject")){
+            acceptShop.setVisibility(View.INVISIBLE);
+            rejectShop.setVisibility(View.INVISIBLE);
+//            Toast.makeText(this, bundle.getString("applicationStatus"), Toast.LENGTH_SHORT).show();
+        }
+
+//        Toast.makeText(this, bundle.getString("applicationStatus")+"outside", Toast.LENGTH_SHORT).show();
         assert bundle != null;
         shopName.setText(bundle.getString("shopName"));
         shopLatitude.setText(bundle.getString("shopLatitude"));
@@ -119,6 +142,129 @@ public class ShopInfoActivity extends AppCompatActivity {
                 bundle1.putString("photoPreview",bundle.getString("gstCertificate"));
                 bundle1.putString("photoDes","Gst Certificate");
                 startActivity(new Intent(ShopInfoActivity.this,PhotoPreviewActivity.class).putExtras(bundle1));
+
+            }
+        });
+
+        acceptShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LayoutInflater layoutInflater=LayoutInflater.from(ShopInfoActivity.this);
+                View view1=layoutInflater.inflate(R.layout.alert_dialog,null);
+                Button yesButton=view1.findViewById(R.id.btn_yes);
+                Button cancelButton=view1.findViewById(R.id.btn_cancel);
+
+                final AlertDialog alertDialog=new AlertDialog.Builder(ShopInfoActivity.this)
+                        .setView(view1)
+                        .create();
+                alertDialog.show();
+
+                yesButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        firebaseFirestore.collection("ShopsMain").whereEqualTo("shopImage",bundle.getString("shopImage"))
+                                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                firebaseFirestore.collection("ShopsMain").document(queryDocumentSnapshots.getDocuments().get(0).getId())
+                                        .update("applicationStatus","accept")
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(ShopInfoActivity.this, "Shop accepted", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                                alertDialog.dismiss();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(ShopInfoActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                                Toast.makeText(ShopInfoActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                            }
+                        });
+
+                    }
+                });
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+
+
+
+
+            }
+        });
+
+        rejectShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LayoutInflater layoutInflater=LayoutInflater.from(ShopInfoActivity.this);
+                View view1=layoutInflater.inflate(R.layout.alert_dialog,null);
+                Button yesButton=view1.findViewById(R.id.btn_yes);
+                Button cancelButton=view1.findViewById(R.id.btn_cancel);
+
+                final AlertDialog alertDialog=new AlertDialog.Builder(ShopInfoActivity.this)
+                        .setView(view1)
+                        .create();
+                alertDialog.show();
+
+                yesButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        firebaseFirestore.collection("ShopsMain").whereEqualTo("shopImage",bundle.getString("shopImage"))
+                                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                firebaseFirestore.collection("ShopsMain").document(queryDocumentSnapshots.getDocuments().get(0).getId())
+                                        .update("applicationStatus","reject")
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(ShopInfoActivity.this, "Shop rejected", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                                alertDialog.dismiss();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(ShopInfoActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                                Toast.makeText(ShopInfoActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                            }
+                        });
+
+                    }
+                });
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
+
 
             }
         });
