@@ -37,7 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
         itemList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentItem=new Intent(WelcomeActivity.this,ItemListActivity.class);
+                Intent intentItem=new Intent(WelcomeActivity.this, ShopListItemActivity.class);
                 startActivity(intentItem);
                 finish();
             }
@@ -128,10 +128,6 @@ public class WelcomeActivity extends AppCompatActivity {
             Intent mainIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(mainIntent);
             finish();
-
-
-
-
 
         }
     }

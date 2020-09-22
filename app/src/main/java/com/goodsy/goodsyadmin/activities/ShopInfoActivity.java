@@ -21,6 +21,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Objects;
+
 public class ShopInfoActivity extends AppCompatActivity {
 
     ImageView btnBack;
@@ -163,16 +165,13 @@ public class ShopInfoActivity extends AppCompatActivity {
                 yesButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        firebaseFirestore.collection("ShopsMain").whereEqualTo("shopImage",bundle.getString("shopImage"))
-                                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                firebaseFirestore.collection("ShopsMain").document(queryDocumentSnapshots.getDocuments().get(0).getId())
+
+                                firebaseFirestore.collection("ShopsMain").document(Objects.requireNonNull(bundle.getString("shopId")))
                                         .update("applicationStatus","accept")
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Toast.makeText(ShopInfoActivity.this, "Shop accepted", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ShopInfoActivity.this, "Shop accepted in ShopsMain collection", Toast.LENGTH_SHORT).show();
                                                 finish();
                                                 alertDialog.dismiss();
                                             }
@@ -183,15 +182,26 @@ public class ShopInfoActivity extends AppCompatActivity {
                                         alertDialog.dismiss();
                                     }
                                 });
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
+
+
+                        documentReference=firebaseFirestore.collection("ShopKeeper").document(Objects.requireNonNull(bundle.getString("shopKeeperId")));
+                        documentReference.collection("Shops").document(Objects.requireNonNull(bundle.getString("shopId")))
+                                .update("applicationStatus","accept")
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+
+                                        Toast.makeText(ShopInfoActivity.this, "Shop accepted in ShopKeeper collection", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
 
                                 Toast.makeText(ShopInfoActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                alertDialog.dismiss();
+
                             }
                         });
+
 
                     }
                 });
@@ -226,16 +236,13 @@ public class ShopInfoActivity extends AppCompatActivity {
                 yesButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        firebaseFirestore.collection("ShopsMain").whereEqualTo("shopImage",bundle.getString("shopImage"))
-                                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                firebaseFirestore.collection("ShopsMain").document(queryDocumentSnapshots.getDocuments().get(0).getId())
+
+                                firebaseFirestore.collection("ShopsMain").document(Objects.requireNonNull(bundle.getString("shopId")))
                                         .update("applicationStatus","reject")
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Toast.makeText(ShopInfoActivity.this, "Shop rejected", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ShopInfoActivity.this, "Shop rejected in ShopsMain collection", Toast.LENGTH_SHORT).show();
                                                 finish();
                                                 alertDialog.dismiss();
                                             }
@@ -246,15 +253,25 @@ public class ShopInfoActivity extends AppCompatActivity {
                                         alertDialog.dismiss();
                                     }
                                 });
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
+
+                        documentReference=firebaseFirestore.collection("ShopKeeper").document(bundle.getString("shopKeeperId"));
+                        documentReference.collection("Shops").document(Objects.requireNonNull(bundle.getString("shopId")))
+                                .update("applicationStatus","reject")
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+
+                                        Toast.makeText(ShopInfoActivity.this, "Shop rejected in ShopKeeper collection", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
 
                                 Toast.makeText(ShopInfoActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                alertDialog.dismiss();
+
                             }
                         });
+
 
                     }
                 });

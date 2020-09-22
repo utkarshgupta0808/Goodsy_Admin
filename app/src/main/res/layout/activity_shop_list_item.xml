@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.ItemListActivity">
+    tools:context=".activities.ShopListItemActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -44,7 +44,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Under Review Items"
+        android:text="Shops of under reviewed items"
         android:textColor="#000000"
         android:textStyle="italic"
         android:textSize="20sp"
@@ -52,12 +52,10 @@
         android:gravity="center"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/item_recycler"
+        android:id="@+id/shop_new_item_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"/>
-
-
 
 
 </LinearLayout>

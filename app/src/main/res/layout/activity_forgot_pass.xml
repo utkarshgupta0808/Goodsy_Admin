@@ -84,7 +84,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send Reset Link"
@@ -93,8 +93,7 @@
             android:background="@drawable/custom_button1"
             android:paddingStart="10dp"
             android:id="@+id/forgotSend"
-            android:paddingEnd="10dp"
-            android:textColor="@color/colorAccent"/>
+            android:paddingEnd="10dp" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -12,7 +12,6 @@
     app:strokeColor="@color/colorPrimaryDark"
     app:strokeWidth="0.2dp">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,13 +30,13 @@
             app:strokeWidth="0.2dp">
 
             <ImageView
-                android:id="@+id/img_shop"
+                android:id="@+id/img_item"
                 android:layout_width="30dp"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_baseline_arrow_back_ios_24"
                 android:scaleType="fitCenter"
                 android:layout_gravity="center"
-                android:contentDescription="shop_image" />
+                android:contentDescription="item_image" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -54,7 +53,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/shop_name"
+                android:id="@+id/item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
@@ -62,30 +61,32 @@
                 android:textColor="#000000"/>
 
             <TextView
-                android:id="@+id/shop_category"
+                android:id="@+id/item_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:text="Shop Category"
+                android:text="item description" />
+
+
+            <TextView
+                android:id="@+id/item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Item Price"
                 android:layout_marginTop="2dp"
                 android:maxLines="1"/>
 
 
+
+
             <TextView
-                android:id="@+id/shop_description"
+                android:id="@+id/item_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:text="shop description" />
-
-
-            <TextView
-                    android:id="@+id/shop_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:text="Shop Address"
-                    />
+                android:text="Item weight"
+                />
 
 
 
@@ -106,6 +107,5 @@
 
 
     </LinearLayout>
-
 
 </com.google.android.material.card.MaterialCardView>

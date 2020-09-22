@@ -44,6 +44,15 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
+    <ImageView
+        android:id="@+id/shop_image"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/logo"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

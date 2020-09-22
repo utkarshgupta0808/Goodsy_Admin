@@ -116,5 +116,10 @@ public class ForgotPassActivity extends AppCompatActivity {
         );
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ForgotPassActivity.this,LoginActivity.class));
+        finish();
+    }
 }
