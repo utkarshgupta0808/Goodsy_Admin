@@ -1,9 +1,5 @@
 package com.goodsy.goodsyadmin.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,13 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.goodsy.goodsyadmin.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
 
@@ -63,7 +62,7 @@ public class ShopInfoActivity extends AppCompatActivity {
         bundle=getIntent().getExtras();
         firebaseFirestore=FirebaseFirestore.getInstance();
 
-        if (bundle.getString("applicationStatus").equals("accept") || bundle.getString("applicationStatus").equals("reject")){
+        if (Objects.equals(bundle.getString("applicationStatus"), "accept") || Objects.equals(bundle.getString("applicationStatus"), "reject")){
             acceptShop.setVisibility(View.INVISIBLE);
             rejectShop.setVisibility(View.INVISIBLE);
 //            Toast.makeText(this, bundle.getString("applicationStatus"), Toast.LENGTH_SHORT).show();
@@ -254,7 +253,7 @@ public class ShopInfoActivity extends AppCompatActivity {
                                     }
                                 });
 
-                        documentReference=firebaseFirestore.collection("ShopKeeper").document(bundle.getString("shopKeeperId"));
+                        documentReference=firebaseFirestore.collection("ShopKeeper").document(Objects.requireNonNull(bundle.getString("shopKeeperId")));
                         documentReference.collection("Shops").document(Objects.requireNonNull(bundle.getString("shopId")))
                                 .update("applicationStatus","reject")
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {

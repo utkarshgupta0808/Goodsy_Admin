@@ -130,7 +130,7 @@ public class ItemInfoActivity extends AppCompatActivity {
 
                         documentReference=firebaseFirestore.collection("ShopsMain").document(ItemListActivity.selectedShop);
                         documentReference.collection("Items").document(Objects.requireNonNull(bundle.getString("itemId")))
-                                .update("itemStatus","accept")
+                                .update("itemStatus","accept","underReview",false)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) { Toast.makeText(ItemInfoActivity.this, "Item accepted", Toast.LENGTH_SHORT).show();
