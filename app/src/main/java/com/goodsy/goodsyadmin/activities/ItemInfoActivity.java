@@ -108,6 +108,7 @@ public class ItemInfoActivity extends AppCompatActivity {
 
                                         firebaseFirestore.collection("ShopsMain").document(ItemListActivity.selectedShop)
                                                 .update("underReviewItem",c[0]).addOnSuccessListener(new OnSuccessListener<Void>() {
+
                                             @Override
                                             public void onSuccess(Void aVoid) {
 
