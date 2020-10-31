@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.goodsy.goodsyadmin.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -34,6 +35,22 @@ public class WelcomeActivity extends AppCompatActivity {
         shopAcceptedList=findViewById(R.id.shops_list_accepted);
         shopRejectedList=findViewById(R.id.shops_list_rejected);
 
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
+        if(getIntent().hasExtra("category")){
+            if(getIntent().getStringExtra("category").equals("Item")){
+                Bundle bundle= new Bundle();
+                bundle.putString("itemId", getIntent().getStringExtra("itemId"));
+                bundle.putString("itemName",getIntent().getStringExtra("itemName"));
+                bundle.putString("itemDescription", getIntent().getStringExtra("itemDescription"));
+                bundle.putString("itemPrice", getIntent().getStringExtra("itemPrice"));
+                bundle.putString("itemWeight", getIntent().getStringExtra("itemWeight"));
+                bundle.putString("itemImage",getIntent().getStringExtra("itemImage"));
+                Intent intent= new Intent(WelcomeActivity.this,ItemInfoActivity.class);
+                intent.putExtras(bundle);
+                ItemListActivity.selectedShop=getIntent().getStringExtra("shopId");
+                startActivity(intent);
+            }
+        }
         itemList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
