@@ -2,6 +2,7 @@ package com.goodsy.goodsyadmin.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.goodsy.goodsyadmin.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,6 +29,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class ItemInfoActivity extends AppCompatActivity {
@@ -34,6 +46,10 @@ public class ItemInfoActivity extends AppCompatActivity {
     EditText rejectReason;
     FirebaseFirestore firebaseFirestore;
     DocumentReference documentReference;
+
+    private RequestQueue mRequestQue;
+    private String URL = "https://fcm.googleapis.com/fcm/send";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +150,9 @@ public class ItemInfoActivity extends AppCompatActivity {
                                 .update("itemStatus","accept","underReview",false)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
-                                    public void onSuccess(Void aVoid) { Toast.makeText(ItemInfoActivity.this, "Item accepted", Toast.LENGTH_SHORT).show();
+                                    public void onSuccess(Void aVoid) {
+                                        sendNotification();
+                                        Toast.makeText(ItemInfoActivity.this, "Item accepted", Toast.LENGTH_SHORT).show();
                                         finish();
                                         alertDialog.dismiss();
                                     }
@@ -268,4 +286,56 @@ public class ItemInfoActivity extends AppCompatActivity {
         });
 
     }
+
+    private void sendNotification() {
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put("to","/topics/"+ItemListActivity.selectedShop);
+            JSONObject notificationObj = new JSONObject();
+            notificationObj.put("title","Item Accepted");
+            notificationObj.put("body",bundle.getString("itemName"));
+
+            JSONObject extraData = new JSONObject();
+            extraData.put("category","Item Accepted");
+            extraData.put("shopId", ItemListActivity.selectedShop);
+
+            json.put("notification",notificationObj);
+            json.put("data",extraData);
+
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,
+                    json,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                            Log.d("MUR", "onResponse: ");
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("MUR", "onError: "+error.networkResponse);
+                }
+            }
+            ){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String,String> header = new HashMap<>();
+                    header.put("content-type","application/json");
+                    header.put("authorization","key=AAAASbIZ3Jw:APA91bH_PDeA9GdG_2JzSDn9ENYBrnykKk66CzQSqsn9G_9QMIcgvd0rmNwUH5pYsj4Fug-71sy_vqdlwB01f02JyKIB_a-_I6CpRLVUxNX3_nk2tVWErtUzg9jh_oCLKUEW2FUNUUOU");
+                    return header;
+                }
+            };
+            mRequestQue.add(request);
+        }
+        catch (JSONException e)
+
+        {
+            e.printStackTrace();
+        }
+
+
+    }
+
 }

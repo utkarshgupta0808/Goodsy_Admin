@@ -7,10 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.goodsy.goodsyadmin.R;
 import com.goodsy.goodsyadmin.adapters.ItemAdapter;
@@ -22,6 +28,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class ItemListActivity extends AppCompatActivity {
@@ -32,7 +43,7 @@ public class ItemListActivity extends AppCompatActivity {
     ItemAdapter itemAdapter;
     DocumentReference documentReference;
     Bundle bundle;
-    static String selectedShop;
+    public static String selectedShop;
 
 
     @Override
