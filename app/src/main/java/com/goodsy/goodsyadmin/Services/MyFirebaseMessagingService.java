@@ -9,21 +9,18 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Map;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.bumptech.glide.Glide;
 import com.goodsy.goodsyadmin.R;
 import com.goodsy.goodsyadmin.activities.ItemInfoActivity;
 import com.goodsy.goodsyadmin.activities.ItemListActivity;
-import com.goodsy.goodsyadmin.activities.WelcomeActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -43,18 +40,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         try {
             URL url= new URL(itemImage);
             bitmap= BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
         NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, "Goodsu")
+                new NotificationCompat.Builder(getApplicationContext(), "Goodsy")
                         .setContentTitle(title)
                         .setContentText(body)
-                        .setSmallIcon(R.drawable.ic_launcher_background)
+                        .setSmallIcon(R.drawable.noti_stroke)
                         .setLargeIcon(bitmap);
-
 
         if(extraData.get("category")!=null){
             if(extraData.get("category").equals("Item")){
@@ -82,14 +76,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
 
-        int id =  (int) System.currentTimeMillis();
+        int id = (int) System.currentTimeMillis();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("Goodsy","New Items",NotificationManager.IMPORTANCE_HIGH);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("Goodsy", "New Items", NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
         }
-        notificationManager.notify(id,notificationBuilder.build());
+        notificationManager.notify(id, notificationBuilder.build());
 
     }
 
+    @Override
+    public void onNewToken(@NonNull String s) {
+        super.onNewToken(s);
+    }
 }

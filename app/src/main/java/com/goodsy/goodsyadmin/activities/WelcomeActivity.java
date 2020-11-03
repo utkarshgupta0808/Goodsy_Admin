@@ -1,8 +1,5 @@
 package com.goodsy.goodsyadmin.activities;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.goodsy.goodsyadmin.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,19 +21,20 @@ public class WelcomeActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     ImageView btnLogout;
-    TextView shopList, itemList, shopAcceptedList, shopRejectedList;
+    TextView shopList, itemList, shopAcceptedList, shopRejectedList, addDefaultImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        firebaseAuth=FirebaseAuth.getInstance();
-        shopList=findViewById(R.id.shops_list);
-        itemList=findViewById(R.id.items_list);
-        btnLogout=findViewById(R.id.btn_logout);
+        firebaseAuth = FirebaseAuth.getInstance();
+        shopList = findViewById(R.id.shops_list);
+        itemList = findViewById(R.id.items_list);
+        btnLogout = findViewById(R.id.btn_logout);
         shopAcceptedList=findViewById(R.id.shops_list_accepted);
-        shopRejectedList=findViewById(R.id.shops_list_rejected);
+        shopRejectedList = findViewById(R.id.shops_list_rejected);
+        addDefaultImages = findViewById(R.id.add_default_images);
 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
         if(getIntent().hasExtra("category")){
@@ -54,22 +55,25 @@ public class WelcomeActivity extends AppCompatActivity {
         itemList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentItem=new Intent(WelcomeActivity.this, ShopListItemActivity.class);
+                Intent intentItem = new Intent(WelcomeActivity.this, ShopListItemActivity.class);
                 startActivity(intentItem);
                 finish();
             }
         });
 
-
+        addDefaultImages.setOnClickListener(v -> {
+            Intent intentItem = new Intent(WelcomeActivity.this, AddDefaultImageActivity.class);
+            startActivity(intentItem);
+        });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                LayoutInflater layoutInflater=LayoutInflater.from(WelcomeActivity.this);
-                View view1=layoutInflater.inflate(R.layout.alert_dialog,null);
-                Button yesButton=view1.findViewById(R.id.btn_yes);
-                Button cancelButton=view1.findViewById(R.id.btn_cancel);
+                LayoutInflater layoutInflater = LayoutInflater.from(WelcomeActivity.this);
+                View view1 = layoutInflater.inflate(R.layout.alert_dialog, null);
+                Button yesButton = view1.findViewById(R.id.btn_yes);
+                Button cancelButton = view1.findViewById(R.id.btn_cancel);
 
                 final AlertDialog alertDialog=new AlertDialog.Builder(WelcomeActivity.this)
                         .setView(view1)
