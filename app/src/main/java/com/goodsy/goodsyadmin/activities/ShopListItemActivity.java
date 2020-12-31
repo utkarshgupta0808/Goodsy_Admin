@@ -43,6 +43,7 @@ public class ShopListItemActivity extends AppCompatActivity {
         recyclerView.setAdapter(shopItemAdapter);
 
 
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

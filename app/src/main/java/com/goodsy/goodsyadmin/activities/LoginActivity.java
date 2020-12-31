@@ -67,11 +67,19 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
 
-                                Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                                if (firebaseAuth.getCurrentUser().getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")){
+
+                                    Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 //                            intent.putExtra("user_id", "" + userId);
-                                startActivity(intent);
-                                finish();
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                else{
+                                    Toast.makeText(LoginActivity.this, "Please login with admin user", Toast.LENGTH_SHORT).show();
+                                }
+
+
                             } else {
                                 String errorMessage = Objects.requireNonNull(task.getException()).getMessage();
                                 Toast.makeText(LoginActivity.this, "Error : " + errorMessage, Toast.LENGTH_LONG).show();
@@ -110,9 +118,18 @@ public class LoginActivity extends AppCompatActivity {
         if (currentUser != null) {
             sendToMain();
         }
+        if (currentUser!=null){
+            if (currentUser.getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")){
+
+
+                sendToMain();
+
+
 
 
     }
+            }
+        }
 
     private void sendToMain() {
 

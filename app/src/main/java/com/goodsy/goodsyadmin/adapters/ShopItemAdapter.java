@@ -55,6 +55,8 @@ public class ShopItemAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopIte
             public void onClick(View view) {
                 bundle.putString("photoPreview",model.getShopImage());
                 bundle.putString("photoDes","Shop Image");
+
+
                 holder.cardViewPhoto.getContext().startActivity(new Intent(holder.cardViewPhoto.getContext(), PhotoPreviewActivity.class).putExtras(bundle));
 
             }
