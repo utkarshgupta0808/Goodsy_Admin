@@ -21,7 +21,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     ImageView btnLogout;
-    TextView shopList, itemList, shopAcceptedList, shopRejectedList, addDefaultImages;
+    TextView shopList, itemList, shopAcceptedList, shopRejectedList, addDefaultImages, addDefaultItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
         shopAcceptedList=findViewById(R.id.shops_list_accepted);
         shopRejectedList = findViewById(R.id.shops_list_rejected);
         addDefaultImages = findViewById(R.id.add_default_images);
+        addDefaultItems = findViewById(R.id.add_default_items);
 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
         if(getIntent().hasExtra("category")){
@@ -63,6 +64,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
         addDefaultImages.setOnClickListener(v -> {
             Intent intentItem = new Intent(WelcomeActivity.this, AddDefaultImageActivity.class);
+            startActivity(intentItem);
+        });
+
+        addDefaultItems.setOnClickListener(v -> {
+            Intent intentItem = new Intent(WelcomeActivity.this, AddDefaultItemsActivity.class);
             startActivity(intentItem);
         });
 

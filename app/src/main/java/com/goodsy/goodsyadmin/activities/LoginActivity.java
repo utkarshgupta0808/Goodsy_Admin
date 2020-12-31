@@ -20,8 +20,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.w3c.dom.Text;
-
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
@@ -36,17 +34,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username=findViewById(R.id.username);
-        password=findViewById(R.id.pass);
-        btnLogin=findViewById(R.id.btn_login);
-        forgotPass=findViewById(R.id.forget_pass);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.pass);
+        btnLogin = findViewById(R.id.btn_login);
+        forgotPass = findViewById(R.id.forget_pass);
 
-        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,ForgotPassActivity.class));
+                startActivity(new Intent(LoginActivity.this, ForgotPassActivity.class));
                 finish();
             }
         });
@@ -54,18 +52,15 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email= username.getText().toString().trim();
-                String pass= password.getText().toString().trim();
+                String email = username.getText().toString().trim();
+                String pass = password.getText().toString().trim();
 
 
-                if (TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     username.setError("Email is Required");
-                }
-
-                else if (TextUtils.isEmpty(pass)){
+                } else if (TextUtils.isEmpty(pass)) {
                     password.setError("Password is Required");
-                }
-                else {
+                } else {
                     showProgress();
                     firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -91,12 +86,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
 
-
             }
         });
-
-
-
 
 
     }
@@ -116,18 +107,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        if(currentUser!=null){
-
-
-                sendToMain();
-
-
-
-
+        if (currentUser != null) {
+            sendToMain();
         }
 
 
     }
+
     private void sendToMain() {
 
         Intent mainIntent = new Intent(LoginActivity.this, WelcomeActivity.class);

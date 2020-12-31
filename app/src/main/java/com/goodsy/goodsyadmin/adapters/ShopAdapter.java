@@ -1,6 +1,5 @@
 package com.goodsy.goodsyadmin.adapters;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,12 +29,6 @@ public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter
 
     Bundle bundle;
 
-    /**
-     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
-     * FirestoreRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
     public ShopAdapter(@NonNull FirestoreRecyclerOptions<ShopModel> options) {
         super(options);
     }

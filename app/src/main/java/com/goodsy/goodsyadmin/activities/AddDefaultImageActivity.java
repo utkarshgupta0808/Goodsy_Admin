@@ -126,10 +126,8 @@ public class AddDefaultImageActivity extends AppCompatActivity {
                 Collections.sort(spinnerData);
                 for (int i = 0; i < Objects.requireNonNull(spinnerData).size(); i++) {
                     unitModelArrayList.add(new CategoryModel(spinnerData.get(i)));
-
                 }
                 Toast.makeText(this, "data: " + spinnerData, Toast.LENGTH_SHORT).show();
-
             }
         });
     }
