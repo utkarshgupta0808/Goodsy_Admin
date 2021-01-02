@@ -2,9 +2,6 @@ package com.goodsy.goodsyadmin.helper;
 
 import android.app.Application;
 
-/**
- * Created by AkshayeJH on 16/07/17.
- */
 
 public class GetTimeAgo extends Application {
 
@@ -41,7 +38,6 @@ public class GetTimeAgo extends Application {
             return null;
         }
 
-        // TODO: localize
         final long diff = now - time;
         if (diff < MINUTE_MILLIS) {
             return "just now";
