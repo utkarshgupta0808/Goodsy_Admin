@@ -18,7 +18,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
@@ -67,15 +66,14 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
 
-                                if (firebaseAuth.getCurrentUser().getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")){
+                                if (firebaseAuth.getCurrentUser().getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")) {
 
                                     Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 //                            intent.putExtra("user_id", "" + userId);
                                     startActivity(intent);
                                     finish();
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(LoginActivity.this, "Please login with admin user", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -110,32 +108,24 @@ public class LoginActivity extends AppCompatActivity {
         );
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+//
+//        if (currentUser != null) {
+//
+//            if (currentUser.getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")) {
+//                sendToMain();
+//            }
+//        }
+//    }
 
-        if (currentUser != null) {
-            sendToMain();
-        }
-        if (currentUser!=null){
-            if (currentUser.getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")){
-
-
-                sendToMain();
-
-
-
-
-    }
-            }
-        }
-
-    private void sendToMain() {
-
-        Intent mainIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
-        startActivity(mainIntent);
-        finish();
-
-    }
+//    private void sendToMain() {
+//
+//        Intent mainIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
+//        startActivity(mainIntent);
+//        finish();
+//
+//    }
 }

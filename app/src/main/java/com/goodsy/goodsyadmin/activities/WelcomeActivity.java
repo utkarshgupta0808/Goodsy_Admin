@@ -20,7 +20,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 public class WelcomeActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
-    ImageView btnLogout;
+    ImageView btnLogout, imageViewChat;
     TextView shopList, itemList, shopAcceptedList, shopRejectedList, addDefaultImages, addDefaultItems;
 
     @Override
@@ -36,6 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
         shopRejectedList = findViewById(R.id.shops_list_rejected);
         addDefaultImages = findViewById(R.id.add_default_images);
         addDefaultItems = findViewById(R.id.add_default_items);
+        imageViewChat = findViewById(R.id.chat_image);
 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
         if(getIntent().hasExtra("category")){
@@ -60,6 +61,11 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(intentItem);
                 finish();
             }
+        });
+
+        imageViewChat.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ChatListActivity.class);
+            startActivity(intent);
         });
 
         addDefaultImages.setOnClickListener(v -> {
@@ -150,7 +156,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        if (currentUser == null) {
+        if (currentUser == null || !currentUser.getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")) {
 
             Intent mainIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(mainIntent);

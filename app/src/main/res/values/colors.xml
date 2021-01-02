@@ -5,4 +5,14 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="white">#FFFFFF</color>
     <color name="textColor">#5D70D5</color>
+
+
+    <color name="dark">#FFFFFF</color>
+    <color name="textColorMain">#FF2D313D</color>
+    <color name="text">#FF2D313D</color>
+    <color name="cardBack">#FFFFFF</color>
+    <color name="chat_bottom">#F6F6F6</color>
+    <color name="editTextHintColor">#828797</color>
+    <color name="iconColor">#464646</color>
+    <color name="light_grey">#D3D3D3</color>
 </resources>
