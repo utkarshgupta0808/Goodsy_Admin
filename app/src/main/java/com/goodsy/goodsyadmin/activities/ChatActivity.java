@@ -24,6 +24,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.goodsy.goodsyadmin.R;
 import com.goodsy.goodsyadmin.adapters.MessageAdapter;
 import com.goodsy.goodsyadmin.models.MessagesModel;
@@ -42,6 +46,9 @@ import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -53,8 +60,11 @@ import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
 
+import static com.goodsy.goodsyadmin.activities.WelcomeActivity.adminDeviceToken;
 import static com.goodsy.goodsyadmin.utils.Constants.TOTAL_ITEMS_TO_LOAD;
 import static com.goodsy.goodsyadmin.utils.Constants.mCurrentPage;
+import static com.goodsy.goodsyadmin.utils.Constants.mainUsersCollection;
+import static com.goodsy.goodsyadmin.utils.Constants.notiURL;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -73,10 +83,12 @@ public class ChatActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private LinearLayoutManager mLinearLayout;
     private Bitmap compressedImageFile;
+    String userDeviceToken;
 
     private int itemPos = 0;
     private String mLastKey = "";
     private String mPrevKey = "";
+    RequestQueue mQueue;
 
     private StorageReference mImageStorage;
 
@@ -98,6 +110,8 @@ public class ChatActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("userId") != null)
             mChatUser = getIntent().getStringExtra("userId");
 
+        loadToken();
+
         editTextMessage = findViewById(R.id.edit_text_chat);
         imageViewAddFiles = findViewById(R.id.chat_add_file);
         imageViewSendBtn = findViewById(R.id.send_button_chat);
@@ -107,6 +121,7 @@ public class ChatActivity extends AppCompatActivity {
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mImageStorage = FirebaseStorage.getInstance().getReference();
+        mQueue = Volley.newRequestQueue(this);
 
         messageAdapter = new MessageAdapter(messagesList, this);
 
@@ -130,6 +145,14 @@ public class ChatActivity extends AppCompatActivity {
 
         imageViewAddFiles.setOnClickListener(view -> checkStoragePermission());
 
+    }
+
+    private void loadToken() {
+        firebaseFirestore.collection(mainUsersCollection).document(mChatUser).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                userDeviceToken = (String) task.getResult().get("deviceToken");
+            }
+        });
     }
 
     void checkStoragePermission() {
@@ -177,13 +200,7 @@ public class ChatActivity extends AppCompatActivity {
             messageUserMap.put(chat_user_ref + "/" + push_id, messageMap);
 
             editTextMessage.setText("");
-
-//            mRootRef.child("Chat").child(currentUserId).child(mChatUser).child("seen").setValue(true);
-//            mRootRef.child("Chat").child(currentUserId).child(mChatUser).child("timestamp").setValue(ServerValue.TIMESTAMP);
-//
-//            mRootRef.child("Chat").child(mChatUser).child(currentUserId).child("seen").setValue(false);
-//            mRootRef.child("Chat").child(mChatUser).child(currentUserId).child("timestamp").setValue(ServerValue.TIMESTAMP);
-
+            sendNotification(userDeviceToken, message, "Text");
             mRootRef.updateChildren(messageUserMap, (error, ref) -> {
                 if (error != null) {
 
@@ -191,7 +208,6 @@ public class ChatActivity extends AppCompatActivity {
 
                 }
             });
-
         }
 
     }
@@ -302,6 +318,36 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
+    private void sendNotification(String userDeviceToken, String message, String type) {
+
+        JSONObject object = new JSONObject();
+        JSONObject innerObject = new JSONObject();
+        try {
+            innerObject.put("user_id", currentUserId);
+            innerObject.put("sender_fcm", adminDeviceToken);
+            innerObject.put("message", message);
+            innerObject.put("type", type);
+            innerObject.put("name", "Goodsy Support");
+            innerObject.put("image", "https://firebasestorage.googleapis.com/v0/b/goodsy-da8cc.appspot.com/o/GoodsyOfficial%2Fblue%20bg.png?alt=media&token=c3070839-eb45-40ed-bef4-a8795c11f5bc");
+            innerObject.put("notiType", "Message");
+            object.put("data", innerObject);
+            object.put("to", userDeviceToken);
+            JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST, notiURL, object, response -> {
+            }, Throwable::printStackTrace) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("authorization", "key=AAAASbIZ3Jw:APA91bH_PDeA9GdG_2JzSDn9ENYBrnykKk66CzQSqsn9G_9QMIcgvd0rmNwUH5pYsj4Fug-71sy_vqdlwB01f02JyKIB_a-_I6CpRLVUxNX3_nk2tVWErtUzg9jh_oCLKUEW2FUNUUOU");
+                    map.put("Content-Type", "application/json");
+                    return map;
+                }
+            };
+            mQueue.add(objectRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -357,6 +403,7 @@ public class ChatActivity extends AppCompatActivity {
                             messageUserMap.put(chat_user_ref + "/" + push_id, messageMap);
 
                             editTextMessage.setText("");
+                            sendNotification(userDeviceToken, file, "Image");
 
                             mRootRef.updateChildren(messageUserMap, (databaseError, databaseReference) -> {
 

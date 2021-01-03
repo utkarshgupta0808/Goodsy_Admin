@@ -15,13 +15,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.goodsy.goodsyadmin.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import static com.goodsy.goodsyadmin.utils.Constants.mainUsersCollection;
 
 public class WelcomeActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
-    ImageView btnLogout, imageViewChat;
+    public static String adminDeviceToken;
+    FirebaseFirestore firebaseFirestore;
     TextView shopList, itemList, shopAcceptedList, shopRejectedList, addDefaultImages, addDefaultItems;
+    ImageView btnLogout, imageViewChat, imageViewTokenUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,38 +34,38 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
         shopList = findViewById(R.id.shops_list);
         itemList = findViewById(R.id.items_list);
         btnLogout = findViewById(R.id.btn_logout);
-        shopAcceptedList=findViewById(R.id.shops_list_accepted);
+        shopAcceptedList = findViewById(R.id.shops_list_accepted);
         shopRejectedList = findViewById(R.id.shops_list_rejected);
         addDefaultImages = findViewById(R.id.add_default_images);
         addDefaultItems = findViewById(R.id.add_default_items);
         imageViewChat = findViewById(R.id.chat_image);
+        imageViewTokenUpdate = findViewById(R.id.update_token);
 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
-        if(getIntent().hasExtra("category")){
-            if(getIntent().getStringExtra("category").equals("Item")){
-                Bundle bundle= new Bundle();
+        if (getIntent().hasExtra("category")) {
+            if (getIntent().getStringExtra("category").equals("Item")) {
+                Bundle bundle = new Bundle();
                 bundle.putString("itemId", getIntent().getStringExtra("itemId"));
-                bundle.putString("itemName",getIntent().getStringExtra("itemName"));
+                bundle.putString("itemName", getIntent().getStringExtra("itemName"));
                 bundle.putString("itemDescription", getIntent().getStringExtra("itemDescription"));
                 bundle.putString("itemPrice", getIntent().getStringExtra("itemPrice"));
                 bundle.putString("itemWeight", getIntent().getStringExtra("itemWeight"));
-                bundle.putString("itemImage",getIntent().getStringExtra("itemImage"));
-                Intent intent= new Intent(WelcomeActivity.this,ItemInfoActivity.class);
+                bundle.putString("itemImage", getIntent().getStringExtra("itemImage"));
+                Intent intent = new Intent(WelcomeActivity.this, ItemInfoActivity.class);
                 intent.putExtras(bundle);
-                ItemListActivity.selectedShop=getIntent().getStringExtra("shopId");
+                ItemListActivity.selectedShop = getIntent().getStringExtra("shopId");
                 startActivity(intent);
             }
         }
-        itemList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentItem = new Intent(WelcomeActivity.this, ShopListItemActivity.class);
-                startActivity(intentItem);
-                finish();
-            }
+
+        itemList.setOnClickListener(view -> {
+            Intent intentItem = new Intent(WelcomeActivity.this, ShopListItemActivity.class);
+            startActivity(intentItem);
+            finish();
         });
 
         imageViewChat.setOnClickListener(v -> {
@@ -78,73 +83,56 @@ public class WelcomeActivity extends AppCompatActivity {
             startActivity(intentItem);
         });
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnLogout.setOnClickListener(view -> {
 
-                LayoutInflater layoutInflater = LayoutInflater.from(WelcomeActivity.this);
-                View view1 = layoutInflater.inflate(R.layout.alert_dialog, null);
-                Button yesButton = view1.findViewById(R.id.btn_yes);
-                Button cancelButton = view1.findViewById(R.id.btn_cancel);
+            LayoutInflater layoutInflater = LayoutInflater.from(WelcomeActivity.this);
+            View view1 = layoutInflater.inflate(R.layout.alert_dialog, null);
+            Button yesButton = view1.findViewById(R.id.btn_yes);
+            Button cancelButton = view1.findViewById(R.id.btn_cancel);
 
-                final AlertDialog alertDialog=new AlertDialog.Builder(WelcomeActivity.this)
-                        .setView(view1)
-                        .create();
-                alertDialog.show();
+            final AlertDialog alertDialog = new AlertDialog.Builder(WelcomeActivity.this).setView(view1).create();
+            alertDialog.show();
 
-                yesButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        logOut();
-                    }
-                });
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alertDialog.dismiss();
-                    }
-                });
+            yesButton.setOnClickListener(view2 -> logOut());
+            cancelButton.setOnClickListener(view22 -> alertDialog.dismiss());
 
 
-            }
         });
 
-        shopList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentShop=new Intent(WelcomeActivity.this, ShopListActivity.class);
-                startActivity(intentShop);
-                finish();
+        shopList.setOnClickListener(view -> {
+            Intent intentShop = new Intent(WelcomeActivity.this, ShopListActivity.class);
+            startActivity(intentShop);
+            finish();
 
-            }
         });
 
-        shopAcceptedList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentShop=new Intent(WelcomeActivity.this, AcceptedShopsActivity.class);
-                startActivity(intentShop);
-                finish();
+        shopAcceptedList.setOnClickListener(view -> {
+            Intent intentShop = new Intent(WelcomeActivity.this, AcceptedShopsActivity.class);
+            startActivity(intentShop);
+            finish();
 
-            }
         });
 
-        shopRejectedList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentShop=new Intent(WelcomeActivity.this, RejectedShopsActivity.class);
-                startActivity(intentShop);
-                finish();
+        shopRejectedList.setOnClickListener(view -> {
+            Intent intentShop = new Intent(WelcomeActivity.this, RejectedShopsActivity.class);
+            startActivity(intentShop);
+            finish();
 
-            }
         });
+
+        imageViewTokenUpdate.setOnClickListener(v -> FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task1 -> {
+            if (task1.isSuccessful()) {
+                adminDeviceToken = task1.getResult();
+                firebaseFirestore.collection(mainUsersCollection).document(firebaseAuth.getCurrentUser().getUid()).update("deviceToken", adminDeviceToken);
+            }
+        }));
 
     }
 
     private void logOut() {
 
         firebaseAuth.signOut();
-        Intent intentLogout=new Intent(WelcomeActivity.this,LoginActivity.class);
+        Intent intentLogout = new Intent(WelcomeActivity.this, LoginActivity.class);
         startActivity(intentLogout);
         Toast.makeText(WelcomeActivity.this, "Signed Out", Toast.LENGTH_SHORT).show();
         finish();
@@ -157,11 +145,9 @@ public class WelcomeActivity extends AppCompatActivity {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
         if (currentUser == null || !currentUser.getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")) {
-
             Intent mainIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(mainIntent);
             finish();
-
         }
     }
 }
