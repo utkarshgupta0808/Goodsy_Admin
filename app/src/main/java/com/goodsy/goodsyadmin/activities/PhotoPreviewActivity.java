@@ -1,12 +1,11 @@
 package com.goodsy.goodsyadmin.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.goodsy.goodsyadmin.R;
@@ -34,13 +33,9 @@ public class PhotoPreviewActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 finish();
             }
         });
-
-
-
     }
 
     @Override

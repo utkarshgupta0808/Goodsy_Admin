@@ -23,8 +23,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
 
     private final List<ChatListModel> chatArrayList;
     Context context;
-//    FirebaseFirestore firebaseFirestore;
-//    FirebaseAuth firebaseAuth;
 
     public ChatListAdapter(List<ChatListModel> chatArrayList, Context context) {
         this.chatArrayList = chatArrayList;
@@ -43,15 +41,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
 
         ChatListModel chatListModel = chatArrayList.get(position);
 
-//        firebaseAuth = FirebaseAuth.getInstance();
-//        firebaseFirestore = FirebaseFirestore.getInstance();
-
         Glide.with(context).load(chatListModel.getImage()).placeholder(R.drawable.loading_photo).into(holder.imageViewUser);
         holder.textViewName.setText(chatListModel.getName());
 
         holder.constraintLayout.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChatActivity.class);
             intent.putExtra("userId", chatListModel.getDocId());
+            intent.putExtra("userName", chatListModel.getName());
+            intent.putExtra("userImage", chatListModel.getImage());
             context.startActivity(intent);
         });
 

@@ -2,6 +2,8 @@ package com.goodsy.goodsyadmin.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.goodsy.goodsyadmin.R;
+import com.goodsy.goodsyadmin.activities.ChatActivity;
+import com.goodsy.goodsyadmin.activities.PhotoPreviewActivity;
 import com.goodsy.goodsyadmin.helper.GetTimeAgo;
 import com.goodsy.goodsyadmin.models.MessagesModel;
-import com.goodsy.goodsyadmin.utils.Constants;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,7 +31,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
     private final List<MessagesModel> mMessageList;
-    private final int RECEIVER = 1;
+    final int RECEIVER = 1;
     private final int SENDER = 2;
     Context context;
     FirebaseFirestore firebaseFirestore;
@@ -77,20 +80,27 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ((SenderViewHolder) holder).cardViewSenderImage.setVisibility(View.VISIBLE);
                 Glide.with(context).load(c.getMessage()).placeholder(R.drawable.loading_photo).into(((SenderViewHolder) holder).messageImageSender);
             }
+            ((SenderViewHolder) holder).messageImageSender.setOnClickListener(v -> {
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("photoPreview", c.getMessage());
+                bundle1.putString("photoDes", "Preview");
+                context.startActivity(new Intent(context, PhotoPreviewActivity.class).putExtras(bundle1));
+            });
         } else {
             String from_user = c.getFrom();
             String lastSeenTime = GetTimeAgo.getTimeAgo(c.getTime());
             ((ReceiverViewHolder) holder).textViewTimeReceiver.setText(lastSeenTime);
-            firebaseFirestore.collection(Constants.mainUsersCollection).document(from_user).get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    String name = task.getResult().getString("Name");
-                    String image = task.getResult().getString("profilePic");
-                    ((ReceiverViewHolder) holder).displayNameReceiver.setText(name);
-                    Glide.with(context).load(image).placeholder(R.drawable.loading_photo).into(((ReceiverViewHolder) holder).profileImageReceiver);
-                    ((ReceiverViewHolder) holder).textViewPicName.setText(name);
-                    Glide.with(context).load(image).placeholder(R.drawable.loading_photo).into(((ReceiverViewHolder) holder).imageViewPicUser);
-                }
-            });
+//            firebaseFirestore.collection(Constants.mainUsersCollection).document(from_user).get().addOnCompleteListener(task -> {
+//                if (task.isSuccessful()) {
+//                    String name = task.getResult().getString("Name");
+//                    String image = task.getResult().getString("profilePic");
+//
+//                }
+//            });
+            ((ReceiverViewHolder) holder).displayNameReceiver.setText(ChatActivity.chatUserName);
+            Glide.with(context).load(ChatActivity.chatUserImage).placeholder(R.drawable.loading_photo).into(((ReceiverViewHolder) holder).profileImageReceiver);
+            ((ReceiverViewHolder) holder).textViewPicName.setText(ChatActivity.chatUserName);
+            Glide.with(context).load(ChatActivity.chatUserImage).placeholder(R.drawable.loading_photo).into(((ReceiverViewHolder) holder).imageViewPicUser);
             if (message_type.equals("text")) {
                 ((ReceiverViewHolder) holder).cardViewReceiverMessage.setVisibility(View.VISIBLE);
                 ((ReceiverViewHolder) holder).messageTextReceiver.setText(c.getMessage());
@@ -100,6 +110,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ((ReceiverViewHolder) holder).cardViewReceiverImage.setVisibility(View.VISIBLE);
                 Glide.with(context).load(c.getMessage()).placeholder(R.drawable.loading_photo).into(((ReceiverViewHolder) holder).messageImageReceiver);
             }
+            ((ReceiverViewHolder) holder).messageImageReceiver.setOnClickListener(v -> {
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("photoPreview", c.getMessage());
+                bundle1.putString("photoDes", "Preview");
+                context.startActivity(new Intent(context, PhotoPreviewActivity.class).putExtras(bundle1));
+            });
         }
     }
 
@@ -159,5 +175,4 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         }
     }
-
 }

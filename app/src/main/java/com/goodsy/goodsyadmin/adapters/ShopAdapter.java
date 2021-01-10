@@ -62,24 +62,23 @@ public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter
             @Override
             public void onClick(View view) {
 
-                bundle.putString("shopImage",model.getShopImage());
-                bundle.putString("shopId",getSnapshots().getSnapshot(position).getId());
-                bundle.putString("shopName",model.getShopName());
-                bundle.putString("shopDes",model.getShopDescription());
-                bundle.putString("shopCategory",model.getShopCategory());
-                bundle.putString("shopAddress",model.getShopAddress());
-                bundle.putString("aadhaarFront",model.getAadharFront());
-                bundle.putString("panCard",model.getPanCard());
-                bundle.putString("gstCertificate",model.getGst());
-                bundle.putString("aadhaarBack",model.getAadharBack());
-                bundle.putString("shopLongitude",model.getShopLongitude());
-                bundle.putString("shopLatitude",model.getShopLatitude());
-                bundle.putString("shopKeeperId",model.getShopKeeperId());
-                bundle.putString("applicationStatus",model.getApplicationStatus());
+                bundle.putString("shopImage", model.getShopImage());
+                bundle.putString("shopId", getSnapshots().getSnapshot(position).getId());
+                bundle.putString("shopName", model.getShopName());
+                bundle.putString("shopDes", model.getShopDescription());
+                bundle.putString("shopCategory", model.getShopCategory());
+                bundle.putString("shopAddress", model.getShopAddress());
+                bundle.putString("aadhaarFront", model.getAadharFront());
+                bundle.putString("panCard", model.getPanCard());
+                bundle.putString("gstCertificate", model.getGst());
+                bundle.putString("aadhaarBack", model.getAadharBack());
+                bundle.putString("shopLongitude", "" + model.getShopLongitude());
+                bundle.putString("shopLatitude", "" + model.getShopLatitude());
+                bundle.putString("shopKeeperId", model.getShopKeeperId());
+                bundle.putString("applicationStatus", model.getApplicationStatus());
 
 
-
-                FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+                FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
                 firebaseFirestore.collection("ShopKeeper").document(model.getShopKeeperId()).get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override

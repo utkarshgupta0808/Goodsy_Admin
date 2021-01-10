@@ -72,8 +72,7 @@ public class ChatActivity extends AppCompatActivity {
     Toolbar toolbar;
     EditText editTextMessage;
     ImageView imageViewAddFiles, imageViewSendBtn;
-    String mChatUser;
-    String currentUserId;
+    public static String chatUserName, chatUserImage;
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
     LottieAnimationView lottieAnimationViewChat;
@@ -83,12 +82,12 @@ public class ChatActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private LinearLayoutManager mLinearLayout;
     private Bitmap compressedImageFile;
-    String userDeviceToken;
-
     private int itemPos = 0;
     private String mLastKey = "";
     private String mPrevKey = "";
+    String mChatUser, currentUserId, userDeviceToken;
     RequestQueue mQueue;
+
 
     private StorageReference mImageStorage;
 
@@ -109,6 +108,17 @@ public class ChatActivity extends AppCompatActivity {
 
         if (getIntent().getStringExtra("userId") != null)
             mChatUser = getIntent().getStringExtra("userId");
+
+        if (getIntent().getStringExtra("userName") != null)
+            chatUserName = getIntent().getStringExtra("userName");
+        else
+            chatUserName = null;
+
+        if (getIntent().getStringExtra("userImage") != null)
+            chatUserImage = getIntent().getStringExtra("userImage");
+        else
+            chatUserImage = null;
+
 
         loadToken();
 
@@ -153,6 +163,13 @@ public class ChatActivity extends AppCompatActivity {
                 userDeviceToken = (String) task.getResult().get("deviceToken");
             }
         });
+//        firebaseFirestore.collection(mainUsersCollection).document(mChatUser).addSnapshotListener((value, error) -> {
+//            if (error != null){
+//                Toast.makeText(this, "Error: "+error, Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+//            userDeviceToken = (String) value.get("deviceToken");
+//        });
     }
 
     void checkStoragePermission() {
@@ -315,7 +332,6 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void sendNotification(String userDeviceToken, String message, String type) {
@@ -440,5 +456,10 @@ public class ChatActivity extends AppCompatActivity {
                 Toast.makeText(ChatActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -16,6 +16,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -110,6 +111,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void getMessageNotification(RemoteMessage remoteMessage) {
+        Log.d("Message", "Hit");
         Map<String, String> response = remoteMessage.getData();
         String title = response.get("name");
         String user_id = response.get("user_id");

@@ -1,5 +1,6 @@
 package com.goodsy.goodsyadmin.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +31,7 @@ import static com.goodsy.goodsyadmin.utils.Constants.mainUsersCollection;
 
 public class ChatListActivity extends AppCompatActivity {
 
-    private final List<ChatListModel> chatList = new ArrayList<>();
+    public static List<ChatListModel> chatList = new ArrayList<>();
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
     String currentUserId;
@@ -38,8 +39,8 @@ public class ChatListActivity extends AppCompatActivity {
     TextView textViewNoUser;
     int i = 0;
     LottieAnimationView lottieAnimationViewProgress;
-    private DatabaseReference mRootRef;
-    private ChatListAdapter chatListadapter;
+    @SuppressLint("StaticFieldLeak")
+    ChatListAdapter chatListadapter;
     private RecyclerView recyclerViewChatList;
 
     @Override
@@ -54,7 +55,7 @@ public class ChatListActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        mRootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         recyclerViewChatList = findViewById(R.id.recyclerviewChatList);
         lottieAnimationViewProgress = findViewById(R.id.animationViewProgress);
         textViewNoUser = findViewById(R.id.no_chat_user);
@@ -68,7 +69,6 @@ public class ChatListActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot documentSnapshot : snapshot.getChildren()) {
-
                         ChatListModel chatListModel = new ChatListModel();
                         firebaseFirestore.collection(mainUsersCollection).document(documentSnapshot.getKey()).get().addOnCompleteListener(task -> {
                             chatListModel.setImage(task.getResult().getString("profilePic"));
@@ -105,7 +105,6 @@ public class ChatListActivity extends AppCompatActivity {
                     textViewNoUser.setVisibility(View.VISIBLE);
                     recyclerViewChatList.setVisibility(View.GONE);
                 }
-
             }
 
             @Override
@@ -118,4 +117,5 @@ public class ChatListActivity extends AppCompatActivity {
         });
 
     }
+
 }
