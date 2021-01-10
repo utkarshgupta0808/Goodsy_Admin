@@ -123,11 +123,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        if (currentUser == null) {
+        if (currentUser == null || !currentUser.equals("08dYbJiHWBWLG3wUdswjNVQKAls1")) {
 
             Intent mainIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(mainIntent);
             finish();
+
 
         }
     }

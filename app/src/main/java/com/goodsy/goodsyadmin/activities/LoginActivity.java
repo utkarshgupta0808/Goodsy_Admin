@@ -18,9 +18,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import org.w3c.dom.Text;
 
 import java.util.Objects;
 
@@ -119,25 +116,6 @@ public class LoginActivity extends AppCompatActivity {
         );
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-
-        if (currentUser!=null){
-            if (currentUser.getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")){
-
-
-                sendToMain();
-
-
-
-
-            }
-        }
-
-
-    }
     private void sendToMain() {
 
         Intent mainIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
