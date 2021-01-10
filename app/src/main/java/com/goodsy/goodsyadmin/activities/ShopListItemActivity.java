@@ -1,13 +1,13 @@
 package com.goodsy.goodsyadmin.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.goodsy.goodsyadmin.R;
@@ -57,8 +57,6 @@ public class ShopListItemActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         shopItemAdapter.stopListening();
-
-
     }
 
     @Override

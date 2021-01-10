@@ -33,17 +33,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username=findViewById(R.id.username);
-        password=findViewById(R.id.pass);
-        btnLogin=findViewById(R.id.btn_login);
-        forgotPass=findViewById(R.id.forget_pass);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.pass);
+        btnLogin = findViewById(R.id.btn_login);
+        forgotPass = findViewById(R.id.forget_pass);
 
-        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,ForgotPassActivity.class));
+                startActivity(new Intent(LoginActivity.this, ForgotPassActivity.class));
                 finish();
             }
         });
@@ -51,33 +51,29 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email= username.getText().toString().trim();
-                String pass= password.getText().toString().trim();
+                String email = username.getText().toString().trim();
+                String pass = password.getText().toString().trim();
 
 
-                if (TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     username.setError("Email is Required");
-                }
-
-                else if (TextUtils.isEmpty(pass)){
+                } else if (TextUtils.isEmpty(pass)) {
                     password.setError("Password is Required");
-                }
-                else {
+                } else {
                     showProgress();
                     firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
 
-                                if (firebaseAuth.getCurrentUser().getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")){
+                                if (firebaseAuth.getCurrentUser().getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")) {
 
                                     Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 //                            intent.putExtra("user_id", "" + userId);
                                     startActivity(intent);
                                     finish();
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(LoginActivity.this, "Please login with admin user", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -96,12 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
 
-
             }
         });
-
-
-
 
 
     }
@@ -116,11 +108,24 @@ public class LoginActivity extends AppCompatActivity {
         );
     }
 
-    private void sendToMain() {
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+//
+//        if (currentUser != null) {
+//
+//            if (currentUser.getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")) {
+//                sendToMain();
+//            }
+//        }
+//    }
 
-        Intent mainIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
-        startActivity(mainIntent);
-        finish();
-
-    }
+//    private void sendToMain() {
+//
+//        Intent mainIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
+//        startActivity(mainIntent);
+//        finish();
+//
+//    }
 }

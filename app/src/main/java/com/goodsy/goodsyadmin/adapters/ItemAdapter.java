@@ -60,7 +60,9 @@ public class ItemAdapter extends FirestoreRecyclerAdapter<ItemModel, ItemAdapter
                 bundle.putString("itemPrice",model.getItemPrice());
                 bundle.putString("itemId",getSnapshots().getSnapshot(position).getId());
                 bundle.putString("itemWeight",model.getItemWeight());
-                bundle.putString("itemDescription",model.getItemDescription());
+                bundle.putString("itemDescription", model.getItemDescription());
+                bundle.putString("itemImage", model.getItemImage());
+
                 holder.cardViewLayout.getContext().startActivity(new Intent(holder.cardViewLayout.getContext(), ItemInfoActivity.class).putExtras(bundle));
 
             }

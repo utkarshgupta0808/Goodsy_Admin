@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Goodsy Admin</string>
+    <string name="progress_loading">Loading</string>
+    <string name="tip_message">Hey, how are you!</string>
+    <string name="query">New query to solve</string>
+    <string name="userfirstname">Tapan</string>
+    <string name="chat">Chat</string>
+    <string name="chat_users">Chat Users</string>
+    <string name="no_query">No Query to resolve</string>
 </resources>
