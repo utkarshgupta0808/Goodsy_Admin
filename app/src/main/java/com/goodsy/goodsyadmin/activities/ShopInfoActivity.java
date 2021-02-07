@@ -60,6 +60,7 @@ public class ShopInfoActivity extends AppCompatActivity {
 
 
         bundle=getIntent().getExtras();
+
         firebaseFirestore=FirebaseFirestore.getInstance();
 
         if (Objects.equals(bundle.getString("applicationStatus"), "accept") || Objects.equals(bundle.getString("applicationStatus"), "reject")){

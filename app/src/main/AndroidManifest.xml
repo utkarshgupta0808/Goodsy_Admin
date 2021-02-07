@@ -12,6 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.DeliveryBoyInfoActivity"></activity>
+        <activity android:name=".activities.DeliveryBoyListActivity" />
+        <activity android:name=".activities.OrdersPerUserActivity" />
+        <activity android:name=".activities.OrderPerShopActivity" />
+        <activity android:name=".activities.NewDeliveryBoyActivity" />
         <activity android:name=".activities.ChatListActivity" />
         <activity android:name=".activities.ChatActivity" />
         <activity android:name=".activities.AddDefaultItemsActivity" />
