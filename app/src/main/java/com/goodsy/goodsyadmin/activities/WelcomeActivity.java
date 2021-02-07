@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.goodsy.goodsyadmin.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +26,7 @@ public class WelcomeActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     public static String adminDeviceToken;
     FirebaseFirestore firebaseFirestore;
-    TextView shopList, itemList, shopAcceptedList, shopRejectedList, addDefaultImages, addDefaultItems;
+    CardView shopList, itemList, shopAcceptedList, shopRejectedList, addDefaultImages, addDefaultItems, allDeliveryBoys, newDeliverBoys;
     ImageView btnLogout, imageViewChat, imageViewTokenUpdate;
 
     @Override
@@ -44,6 +45,8 @@ public class WelcomeActivity extends AppCompatActivity {
         addDefaultItems = findViewById(R.id.add_default_items);
         imageViewChat = findViewById(R.id.chat_image);
         imageViewTokenUpdate = findViewById(R.id.update_token);
+        allDeliveryBoys=findViewById(R.id.all_delivery_boys);
+        newDeliverBoys=findViewById(R.id.new_delivery_boy);
 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
         if (getIntent().hasExtra("category")) {
@@ -62,10 +65,26 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         }
 
+        newDeliverBoys.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WelcomeActivity.this, NewDeliveryBoyActivity.class));
+                finish();
+            }
+        });
+
         itemList.setOnClickListener(view -> {
             Intent intentItem = new Intent(WelcomeActivity.this, ShopListItemActivity.class);
             startActivity(intentItem);
             finish();
+        });
+
+        allDeliveryBoys.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WelcomeActivity.this, DeliveryBoyListActivity.class));
+                finish();
+            }
         });
 
         imageViewChat.setOnClickListener(v -> {

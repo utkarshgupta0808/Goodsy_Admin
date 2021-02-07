@@ -25,18 +25,18 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter.MyViewHolder>  {
+public class UserAdapter extends FirestoreRecyclerAdapter<ShopModel, UserAdapter.MyViewHolder>  {
 
     Bundle bundle;
 
-    public ShopAdapter(@NonNull FirestoreRecyclerOptions<ShopModel> options) {
+    public UserAdapter(@NonNull FirestoreRecyclerOptions<ShopModel> options) {
         super(options);
     }
 
 
 
     @Override
-    protected void onBindViewHolder(@NonNull final ShopAdapter.MyViewHolder holder, final int position, @NonNull final ShopModel model) {
+    protected void onBindViewHolder(@NonNull final UserAdapter.MyViewHolder holder, final int position, @NonNull final ShopModel model) {
 
         bundle=new Bundle();
 
@@ -110,7 +110,7 @@ public class ShopAdapter extends FirestoreRecyclerAdapter<ShopModel, ShopAdapter
 
     @NonNull
     @Override
-    public ShopAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UserAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_shop, parent, false);
         return new MyViewHolder(view);
     }
