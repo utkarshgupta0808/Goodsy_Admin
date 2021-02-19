@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.goodsy.goodsyadmin.utils.Constants.mainUsersCollection;
 
@@ -60,7 +61,7 @@ public class ChatListActivity extends AppCompatActivity {
         lottieAnimationViewProgress = findViewById(R.id.animationViewProgress);
         textViewNoUser = findViewById(R.id.no_chat_user);
 
-        currentUserId = firebaseAuth.getCurrentUser().getUid();
+        currentUserId = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
 
         DatabaseReference messageRef = mRootRef.child("messages").child(currentUserId);
 
@@ -70,8 +71,8 @@ public class ChatListActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     for (DataSnapshot documentSnapshot : snapshot.getChildren()) {
                         ChatListModel chatListModel = new ChatListModel();
-                        firebaseFirestore.collection(mainUsersCollection).document(documentSnapshot.getKey()).get().addOnCompleteListener(task -> {
-                            chatListModel.setImage(task.getResult().getString("profilePic"));
+                        firebaseFirestore.collection(mainUsersCollection).document(Objects.requireNonNull(documentSnapshot.getKey())).get().addOnCompleteListener(task -> {
+                            chatListModel.setImage(Objects.requireNonNull(task.getResult()).getString("profilePic"));
                             chatListModel.setName(task.getResult().getString("Name"));
                             chatListModel.setDocId(documentSnapshot.getKey());
                             i++;

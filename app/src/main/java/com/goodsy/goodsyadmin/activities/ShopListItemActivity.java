@@ -1,8 +1,6 @@
 package com.goodsy.goodsyadmin.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,47 +27,31 @@ public class ShopListItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shop_list_item);
 
         btnBack=findViewById(R.id.btn_back);
-        recyclerView=findViewById(R.id.shop_new_item_recycler);
+        recyclerView = findViewById(R.id.shop_new_item_recycler);
 
-        firebaseFirestore= FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
-        Query query= firebaseFirestore.collection("ShopsMain").whereGreaterThan("underReviewItem",0);
-        FirestoreRecyclerOptions<ShopModel> options= new FirestoreRecyclerOptions.Builder<ShopModel>()
-                .setQuery(query, ShopModel.class).build();
-        shopItemAdapter=new ShopItemAdapter(options);
-        shopItemAdapter.notifyDataSetChanged();
+        Query query = firebaseFirestore.collection("ShopsMain").whereGreaterThan("underReviewItem", 0);
+        FirestoreRecyclerOptions<ShopModel> options = new FirestoreRecyclerOptions.Builder<ShopModel>().setQuery(query, ShopModel.class).build();
+        shopItemAdapter = new ShopItemAdapter(options);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(shopItemAdapter);
-
-
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ShopListItemActivity.this,WelcomeActivity.class));
-                finish();
-            }
-        });
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        shopItemAdapter.stopListening();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+        shopItemAdapter.notifyDataSetChanged();
         shopItemAdapter.startListening();
+
+        btnBack.setOnClickListener(view -> onBackPressed());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        shopItemAdapter.stopListening();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(this,WelcomeActivity.class);
-        startActivity(intent);
         finish();
     }
 

@@ -1,13 +1,11 @@
 package com.goodsy.goodsyadmin.activities;
 
+import android.os.Bundle;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.goodsy.goodsyadmin.R;
@@ -31,47 +29,29 @@ public class ShopListActivity extends AppCompatActivity {
         btnBack=findViewById(R.id.btn_back);
         recyclerView=findViewById(R.id.shop_recycler);
 
-        firebaseFirestore= FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
-        Query query= firebaseFirestore.collection("ShopsMain").whereEqualTo("applicationStatus","under");
-        FirestoreRecyclerOptions<ShopModel> options= new FirestoreRecyclerOptions.Builder<ShopModel>()
+        Query query = firebaseFirestore.collection("ShopsMain").whereEqualTo("applicationStatus", "under");
+        FirestoreRecyclerOptions<ShopModel> options = new FirestoreRecyclerOptions.Builder<ShopModel>()
                 .setQuery(query, ShopModel.class).build();
-        shopAdapter=new ShopAdapter(options);
-        shopAdapter.notifyDataSetChanged();
+        shopAdapter = new ShopAdapter(options);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(shopAdapter);
+        shopAdapter.notifyDataSetChanged();
+        shopAdapter.startListening();
 
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ShopListActivity.this,WelcomeActivity.class));
-                finish();
-            }
+        btnBack.setOnClickListener(view -> {
+            onBackPressed();
+            finish();
         });
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         shopAdapter.stopListening();
-
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        shopAdapter.startListening();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent=new Intent(this,WelcomeActivity.class);
-        finish();
-        startActivity(intent);
     }
 
 }

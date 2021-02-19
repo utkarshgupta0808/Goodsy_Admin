@@ -7,36 +7,34 @@
     android:orientation="vertical"
     tools:context=".activities.DeliveryBoyInfoActivity">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary">
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <ImageView
                 android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_arrow_back_ios_24"
-                android:layout_marginEnd="5dp"/>
+                android:layout_marginEnd="5dp"
+                android:padding="4dp"
+                android:src="@drawable/ic_icon_back"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/loc_text_toolbar"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="Goodsy Admin"
-                android:textColor="#ffffff" />
+                android:layout_weight="1" />
 
 
         </LinearLayout>
@@ -47,17 +45,17 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/del_boy_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:text="Delivery Boy name"
         android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="35sp"/>
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,23 +63,21 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/del_boy_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:text="ID"
+                android:text="@string/id"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp" />
-
-
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,19 +85,20 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_mail_24"/>
+                    android:src="@drawable/ic_baseline_mail_24"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/del_boy_mail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Delivery Boy Email"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -112,19 +109,20 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_phone_24"/>
+                    android:src="@drawable/ic_baseline_phone_24"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/del_boy_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Number"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
 
@@ -136,57 +134,51 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_location_city_24"/>
+                    android:src="@drawable/ic_baseline_location_city_24"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/del_boy_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="City"
+                    android:layout_marginBottom="20dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
-                    android:layout_marginBottom="20dp"/>
-
+                    android:textSize="15sp" />
 
             </LinearLayout>
-
 
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:cardCornerRadius="30dp"
             android:layout_gravity="center"
             android:layout_marginEnd="30dp"
-            app:strokeColor="@color/colorPrimary"
             android:elevation="10dp"
+            app:cardCornerRadius="30dp"
+            app:strokeColor="@color/colorPrimary"
             app:strokeWidth="0.2dp">
 
             <TextView
                 android:id="@+id/del_boy_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4.4"
                 android:layout_gravity="center"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
         </com.google.android.material.card.MaterialCardView>
 
-
     </LinearLayout>
 
-
-
-
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:measureAllChildren="true"
@@ -208,7 +200,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total Deliveries :"
+                    android:text="@string/total_deliveries"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
@@ -217,7 +209,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Total deliveries"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
 
@@ -234,7 +225,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total Reviews    :"
+                    android:text="@string/total_reviews"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
@@ -243,7 +234,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Total reviews"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
 
@@ -260,7 +250,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daily counts        :"
+                    android:text="@string/daily_counts"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
@@ -269,10 +259,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Daily counts"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
-
 
             </LinearLayout>
 
@@ -287,7 +275,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Longitude   :"
+                    android:text="@string/longitude"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
@@ -296,7 +284,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="longitude"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
 
@@ -313,7 +300,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Latitude      :"
+                    android:text="@string/latitude"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
@@ -322,30 +309,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="latitude"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
-
             </LinearLayout>
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Documents :"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+                android:layout_marginTop="20dp"
+                android:text="@string/documents"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:text="Aadhaar Card"
-                android:textColor="#000000"
+                android:layout_marginTop="14dp"
+                android:text="@string/aadhaar_card"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <LinearLayout
@@ -353,7 +337,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
@@ -361,25 +345,26 @@
                     android:id="@+id/aadhaar_front"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:scaleType="fitCenter" />
+                    android:scaleType="fitCenter"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/aadhaar_back"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginStart="20dp"
-                    android:scaleType="fitCenter" />
+                    android:scaleType="fitCenter"
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:text="Pan Card"
-                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:text="@string/pan_card"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <ImageView
@@ -388,16 +373,17 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
-                android:scaleType="fitCenter" />
+                android:layout_marginTop="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription" />
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:text="Driving License"
-                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:text="@string/driving_license"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <ImageView
@@ -406,16 +392,17 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
-                android:scaleType="fitCenter" />
+                android:layout_marginTop="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription" />
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:text="RC"
-                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:text="@string/rc"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <ImageView
@@ -424,16 +411,17 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
-                android:scaleType="fitCenter" />
+                android:layout_marginTop="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription" />
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:text="Marksheet"
-                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:text="@string/marksheet"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <ImageView
@@ -442,16 +430,17 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
-                android:scaleType="fitCenter" />
+                android:layout_marginTop="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription" />
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:text="Account Details"
-                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:text="@string/account_details"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <ImageView
@@ -460,16 +449,17 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
-                android:scaleType="fitCenter" />
+                android:layout_marginTop="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription" />
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:text="Cheque"
-                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:text="@string/cheque"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <ImageView
@@ -478,20 +468,17 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
-                android:scaleType="fitCenter" />
+                android:layout_marginTop="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:layout_marginTop="10dp"
-                android:background="#151515"/>
-
-
-
-
-
+                android:layout_marginEnd="5dp"
+                android:background="@color/black" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -505,28 +492,25 @@
                     android:id="@+id/accept_shop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cornerRadius="10dp"
-                    android:text="Accept"
                     android:backgroundTint="@color/colorPrimary"
-                    app:rippleColor="#B1B52F"/>
+                    android:text="@string/accept"
+                    app:cornerRadius="10dp"
+                    app:rippleColor="#B1B52F" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/reject_shop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reject"
-                    app:cornerRadius="10dp"
                     android:layout_marginStart="20dp"
                     android:backgroundTint="#9BBA11"
-                    app:rippleColor="@color/colorPrimary"/>
+                    android:text="@string/reject"
+                    app:cornerRadius="10dp"
+                    app:rippleColor="@color/colorPrimary" />
 
             </LinearLayout>
 
-
-
         </LinearLayout>
 
-
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

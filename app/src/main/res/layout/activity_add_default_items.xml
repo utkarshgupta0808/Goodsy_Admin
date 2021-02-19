@@ -8,12 +8,12 @@
 
     <ImageView
         android:id="@+id/back_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="14dp"
-        android:padding="8dp"
-        android:src="@drawable/back_black"
+        android:padding="4dp"
+        android:src="@drawable/ic_icon_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
@@ -24,29 +24,13 @@
         android:layout_marginTop="18dp"
         android:layout_marginEnd="80dp"
         android:fontFamily="sans-serif-black"
-        android:text="Add Items Category"
-        android:textColor="#FC212020"
+        android:text="@string/add_items_category"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/back_image"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--    <Spinner-->
-    <!--        android:id="@+id/item_image_category"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="62dp"-->
-    <!--        android:layout_marginStart="20dp"-->
-    <!--        android:layout_marginTop="32dp"-->
-    <!--        android:layout_marginEnd="20dp"-->
-    <!--        android:background="@drawable/round_corner"-->
-    <!--        android:gravity="center"-->
-    <!--        android:popupBackground="@drawable/round_corner"-->
-    <!--        android:popupElevation="4dp"-->
-    <!--        android:spinnerMode="dropdown"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/back_image" />-->
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -55,7 +39,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="28dp"
-        android:hint="Enter item category name"
+        android:hint="@string/enter_item_category_name"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusBottomStart="8dp"
         app:boxCornerRadiusTopEnd="8dp"
@@ -83,7 +67,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="18dp"
         android:padding="16dp"
-        android:text="Add category"
+        android:text="@string/add_category"
         android:textAllCaps="false"
         android:textSize="16sp"
         app:cornerRadius="12dp"

@@ -1,19 +1,15 @@
 package com.goodsy.goodsyadmin.activities;
 
+import android.os.Bundle;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.goodsy.goodsyadmin.R;
 import com.goodsy.goodsyadmin.adapters.DeliveryBoyAdapter;
-import com.goodsy.goodsyadmin.adapters.ShopAdapter;
-import com.goodsy.goodsyadmin.models.DeliveryBoyModel;
 import com.goodsy.goodsyadmin.models.DeliveryBoyModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -33,46 +29,30 @@ public class DeliveryBoyListActivity extends AppCompatActivity {
         btnBack=findViewById(R.id.btn_back);
         recyclerView=findViewById(R.id.delivery_boy_recycler);
 
-        firebaseFirestore= FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
-        Query query= firebaseFirestore.collection("DeliveryBoy").whereEqualTo("applicationStatus","accept");
-        FirestoreRecyclerOptions<DeliveryBoyModel> options= new FirestoreRecyclerOptions.Builder<DeliveryBoyModel>()
+        Query query = firebaseFirestore.collection("DeliveryBoy").whereEqualTo("applicationStatus", "accept");
+        FirestoreRecyclerOptions<DeliveryBoyModel> options = new FirestoreRecyclerOptions.Builder<DeliveryBoyModel>()
                 .setQuery(query, DeliveryBoyModel.class).build();
-        deliveryBoyAdapter=new DeliveryBoyAdapter(options);
-        deliveryBoyAdapter.notifyDataSetChanged();
+        deliveryBoyAdapter = new DeliveryBoyAdapter(options);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(deliveryBoyAdapter);
-
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DeliveryBoyListActivity.this,WelcomeActivity.class));
-                finish();
-            }
-        });
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        deliveryBoyAdapter.stopListening();
-
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+        deliveryBoyAdapter.notifyDataSetChanged();
         deliveryBoyAdapter.startListening();
+
+        btnBack.setOnClickListener(view -> onBackPressed());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        deliveryBoyAdapter.stopListening();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(this,WelcomeActivity.class);
         finish();
-        startActivity(intent);
     }
 }

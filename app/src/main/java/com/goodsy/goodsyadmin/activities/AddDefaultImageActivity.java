@@ -84,7 +84,6 @@ public class AddDefaultImageActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         materialCardViewAdd.setOnClickListener(v -> {
-//            checkStoragePermission()
             if (!selectedItemCategory.equals("Select item category"))
                 checkStoragePermission();
             else
@@ -99,7 +98,6 @@ public class AddDefaultImageActivity extends AppCompatActivity {
         setData();
         CategoryAdapter unitAdapter = new CategoryAdapter(this, unitModelArrayList);
         spinnerItemCategory.setAdapter(unitAdapter);
-
         spinnerItemCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -220,7 +218,6 @@ public class AddDefaultImageActivity extends AppCompatActivity {
     }
 
     private void bringImagePicker() {
-
         CropImage.activity()
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .setAspectRatio(1, 1)

@@ -76,7 +76,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setLargeIcon(bitmap);
 
         if (extraData.get("category") != null) {
-            if (extraData.get("category").equals("Item")) {
+            if (Objects.equals(extraData.get("category"), "Item")) {
                 Bundle bundle = new Bundle();
                 bundle.putString("itemId", extraData.get("itemId"));
                 bundle.putString("itemName", extraData.get("itemName"));

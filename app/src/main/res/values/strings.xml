@@ -7,4 +7,92 @@
     <string name="chat">Chat</string>
     <string name="chat_users">Chat Users</string>
     <string name="no_query">No Query to resolve</string>
+
+    //welcome
+    <string name="shops">Shops</string>
+    <string name="new_registered_shops">New Registered Shops</string>
+    <string name="all_accepted_shops">All Accepted Shops</string>
+    <string name="all_rejected_shops">All Rejected Shops</string>
+    <string name="shops_payment">Shops Payment</string>
+    <string name="new_added_items">New Added Items</string>
+    <string name="edited_items">Edited Items</string>
+    <string name="shop_orders">Shop Orders</string>
+    <string name="user_orders">User Orders</string>
+    <string name="delivery_boys">Delivery Boys</string>
+    <string name="new_registered_delivery_boy">New Registered Delivery Boy</string>
+    <string name="all_delivery_boys">All Delivery Boys</string>
+    <string name="add_default_components">Add Default Components</string>
+    <string name="add_default_images">Add Default Images</string>
+    <string name="add_default_items">Add Default Items</string>
+    <string name="orders">Orders</string>
+    <string name="items">Items</string>
+
+    //default_image
+    <string name="upload">Upload</string>
+    <string name="add_image">Add Image</string>
+    <string name="add_items_category">Add Items Category</string>
+    <string name="enter_item_category_name">Enter item category name</string>
+    <string name="add_category">Add category</string>
+    <string name="type_your_message">Type your message</string>
+
+    //delivery_boy
+
+    <string name="total_deliveries">Total Deliveries :</string>
+    <string name="total_reviews">Total Reviews :</string>
+    <string name="daily_counts">Daily counts :</string>
+    <string name="longitude">Longitude :</string>
+    <string name="latitude">Latitude :</string>
+    <string name="documents">Documents :</string>
+    <string name="aadhaar_card">Aadhaar Card</string>
+    <string name="pan_card">Pan Card</string>
+    <string name="driving_license">Driving License</string>
+    <string name="rc">RC</string>
+    <string name="marksheet">Marksheet</string>
+    <string name="account_details">Account Details</string>
+    <string name="cheque">Cheque</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="id">ID</string>
+
+    //login
+    <string name="sign_in">SIGN IN</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">LOGIN</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="admin">Admin</string>
+    <string name="goodsy">Goodsy</string>
+
+    //forget_pass
+    <string name="reset_your_password_here">Reset Your Password Here!!</string>
+    <string name="enter_your_email_id">Enter your Email ID</string>
+    <string name="we_will_send_you_reset_link_to_your">We will send you reset link to your Registered Email!!</string>
+    <string name="send_reset_link">Send Reset Link</string>
+
+    //item_info
+    <string name="reject_reason">Reject Reason</string>
+    <string name="rupee_symbol">₹</string>
+    <string name="item_price">Item Price :</string>
+    <string name="gm">gm</string>
+    <string name="item_weight">Item Weight :</string>
+    <string name="item_description">Item Description :</string>
+    <string name="submit">Submit</string>
+    <string name="under_review_items">Under Review Items</string>
+    <string name="under_review_delivery_boys">Under Review Delivery Boys</string>
+    <string name="users">Users</string>
+    <string name="photo_description">Photo Description</string>
+    <string name="shop_category">Shop Category :</string>
+    <string name="shop_description">Shop Description :</string>
+    <string name="shop_address">Shop Address :</string>
+    <string name="shop_longitude">Shop Longitude :</string>
+    <string name="shop_latitude">Shop Latitude :</string>
+    <string name="gst_certificate">GST Certificate</string>
+    <string name="shopkeeper_details">Shopkeeper Details :</string>
+    <string name="name">Name</string>
+    <string name="owner_email">Owner Email</string>
+    <string name="owner_number">Owner Number</string>
+    <string name="owner_city">Owner City</string>
+    <string name="shops_of_under_reviewed_items">Shops of under reviewed items</string>
+    <string name="under_review_shops">Under Review Shops</string>
+
 </resources>

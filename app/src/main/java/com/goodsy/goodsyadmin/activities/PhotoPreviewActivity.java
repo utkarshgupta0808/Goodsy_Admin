@@ -1,7 +1,6 @@
 package com.goodsy.goodsyadmin.activities;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,18 +29,12 @@ public class PhotoPreviewActivity extends AppCompatActivity {
         Glide.with(this).load(bundle.getString("photoPreview")).into(photoPreview);
         photoDes.setText(bundle.getString("photoDes"));
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        btnBack.setOnClickListener(view -> onBackPressed());
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         finish();
     }
 }

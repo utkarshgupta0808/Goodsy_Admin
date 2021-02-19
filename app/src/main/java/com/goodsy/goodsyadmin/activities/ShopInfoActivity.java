@@ -20,7 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Objects;
 
 public class ShopInfoActivity extends AppCompatActivity {
-
     ImageView btnBack;
     Bundle bundle;
     TextView shopName, shopDes, shopCategory, shopAddress, shopLongitude, shopLatitude, ownerName, ownerNumber, ownerCity, ownerEmail;

@@ -49,6 +49,8 @@ public class AddDefaultItemsActivity extends AppCompatActivity {
             else
                 Toast.makeText(this, "Please wait and try again...", Toast.LENGTH_SHORT).show();
         });
+
+        imageViewBack.setOnClickListener(v -> onBackPressed());
     }
 
     private void addItemCategory() {
@@ -81,29 +83,7 @@ public class AddDefaultItemsActivity extends AppCompatActivity {
                 assert itemsCategories != null;
                 itemsCategories.replaceAll(String::toLowerCase);
                 Collections.sort(itemsCategories);
-                Toast.makeText(this, "data: " + itemsCategories, Toast.LENGTH_SHORT).show();
             }
         });
-//        firebaseFirestore.collection("ItemsCategory").document("autoItemsCategory").get().addOnCompleteListener(task -> {
-//            if (task.isSuccessful()) {
-//                DocumentSnapshot documentSnapshot = task.getResult();
-//                assert documentSnapshot != null;
-//                itemsCategories = (ArrayList<String>) documentSnapshot.get("category");
-//                assert itemsCategories != null;
-//                itemsCategories.replaceAll(String::toLowerCase);
-//                Collections.sort(itemsCategories);
-//                Toast.makeText(this, "data: " + itemsCategories, Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
-//    public static void replace(Set<String> strings)
-//    {
-//        String[] stringsArray = strings.toArray(new String[0]);
-//        for (int i=0; i<stringsArray.length; ++i)
-//        {
-//            stringsArray[i] = stringsArray[i].toLowerCase();
-//        }
-//        strings.clear();
-//        strings.addAll(Arrays.asList(stringsArray));
-//    }
 }

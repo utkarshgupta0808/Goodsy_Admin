@@ -4,19 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.goodsy.goodsyadmin.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -40,62 +35,36 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        forgotPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, ForgotPassActivity.class));
-                finish();
-            }
-        });
+        forgotPass.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, ForgotPassActivity.class)));
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = username.getText().toString().trim();
-                String pass = password.getText().toString().trim();
+        btnLogin.setOnClickListener(view -> {
+            String email = username.getText().toString().trim();
+            String pass = password.getText().toString().trim();
 
-
-                if (TextUtils.isEmpty(email)) {
-                    username.setError("Email is Required");
-                } else if (TextUtils.isEmpty(pass)) {
-                    password.setError("Password is Required");
-                } else {
-                    showProgress();
-                    firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-
-                                if (firebaseAuth.getCurrentUser().getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")) {
-
-                                    Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-//                            intent.putExtra("user_id", "" + userId);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Please login with admin user", Toast.LENGTH_SHORT).show();
-                                }
-
-
-                            } else {
-                                String errorMessage = Objects.requireNonNull(task.getException()).getMessage();
-                                Toast.makeText(LoginActivity.this, "Error : " + errorMessage, Toast.LENGTH_LONG).show();
-
-                            }
-                            progressDialog.dismiss();
+            if (TextUtils.isEmpty(email)) {
+                username.setError("Email is Required");
+            } else if (TextUtils.isEmpty(pass)) {
+                password.setError("Password is Required");
+            } else {
+                showProgress();
+                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")) {
+                            Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Please login with admin user", Toast.LENGTH_SHORT).show();
                         }
-
-
-                    });
-
-                }
-
-
+                    } else {
+                        String errorMessage = Objects.requireNonNull(task.getException()).getMessage();
+                        Toast.makeText(LoginActivity.this, "Error : " + errorMessage, Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                });
             }
         });
-
-
     }
 
     private void showProgress() {
@@ -107,25 +76,4 @@ public class LoginActivity extends AppCompatActivity {
                 android.R.color.transparent
         );
     }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-//
-//        if (currentUser != null) {
-//
-//            if (currentUser.getUid().equals("08dYbJiHWBWLG3wUdswjNVQKAls1")) {
-//                sendToMain();
-//            }
-//        }
-//    }
-
-//    private void sendToMain() {
-//
-//        Intent mainIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
-//        startActivity(mainIntent);
-//        finish();
-//
-//    }
 }

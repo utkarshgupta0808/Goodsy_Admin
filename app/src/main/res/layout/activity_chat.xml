@@ -110,7 +110,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/chat_bottom"
-                android:hint="Type your message"
+                android:hint="@string/type_your_message"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/editTextHintColor"
                 android:textSize="18sp"
