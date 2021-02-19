@@ -1,12 +1,15 @@
 package com.goodsy.goodsyadmin.activities;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.goodsy.goodsyadmin.R;
 import com.goodsy.goodsyadmin.adapters.DeliveryBoyAdapter;
@@ -20,6 +23,8 @@ public class NewDeliveryBoyActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseFirestore firebaseFirestore;
     DeliveryBoyAdapter deliveryBoyAdapter;
+    RelativeLayout relativeLayoutLoading;
+    LottieAnimationView lottieAnimationViewMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,8 @@ public class NewDeliveryBoyActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btn_back);
         recyclerView = findViewById(R.id.new_delivery_boy_recycler);
         firebaseFirestore = FirebaseFirestore.getInstance();
+        relativeLayoutLoading = findViewById(R.id.relative_loading);
+        lottieAnimationViewMain = findViewById(R.id.loading_animation);
 
         Query query = firebaseFirestore.collection("DeliveryBoy").whereEqualTo("applicationStatus", "under");
         FirestoreRecyclerOptions<DeliveryBoyModel> options = new FirestoreRecyclerOptions.Builder<DeliveryBoyModel>().setQuery(query, DeliveryBoyModel.class).build();
@@ -38,6 +45,9 @@ public class NewDeliveryBoyActivity extends AppCompatActivity {
         recyclerView.setAdapter(deliveryBoyAdapter);
         deliveryBoyAdapter.notifyDataSetChanged();
         deliveryBoyAdapter.startListening();
+
+        lottieAnimationViewMain.cancelAnimation();
+        relativeLayoutLoading.setVisibility(View.GONE);
 
         btnBack.setOnClickListener(view -> onBackPressed());
 

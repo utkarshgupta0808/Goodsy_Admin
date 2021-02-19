@@ -12,29 +12,68 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.DeliveryBoyInfoActivity"></activity>
-        <activity android:name=".activities.DeliveryBoyListActivity" />
-        <activity android:name=".activities.OrdersPerUserActivity" />
-        <activity android:name=".activities.OrderPerShopActivity" />
-        <activity android:name=".activities.NewDeliveryBoyActivity" />
-        <activity android:name=".activities.ChatListActivity" />
-        <activity android:name=".activities.ChatActivity" />
-        <activity android:name=".activities.AddDefaultItemsActivity" />
-        <activity android:name=".activities.AddDefaultImageActivity" />
-        <activity android:name=".activities.ItemInfoActivity" />
-        <activity android:name=".activities.ShopListItemActivity" />
-        <activity android:name=".activities.RejectedShopsActivity" />
-        <activity android:name=".activities.AcceptedShopsActivity" />
-        <activity android:name=".activities.ShopInfoActivity" />
-        <activity android:name=".activities.PhotoPreviewActivity" />
-        <activity android:name=".activities.ItemListActivity" />
-        <activity android:name=".activities.ShopListActivity" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.ForgotPassActivity" />
-        <activity android:name=".activities.WelcomeActivity">
+        <activity
+            android:name=".activities.DeliveryBoyInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.DeliveryBoyListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.OrdersPerUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.OrderPerShopActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NewDeliveryBoyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ChatListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AddDefaultItemsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AddDefaultImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ItemInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ShopListItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.RejectedShopsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AcceptedShopsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ShopInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PhotoPreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ItemListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ShopListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ForgotPassActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.WelcomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

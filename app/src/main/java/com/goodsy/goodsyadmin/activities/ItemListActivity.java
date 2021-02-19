@@ -1,12 +1,15 @@
 package com.goodsy.goodsyadmin.activities;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.goodsy.goodsyadmin.R;
 import com.goodsy.goodsyadmin.adapters.ItemAdapter;
@@ -26,17 +29,21 @@ public class ItemListActivity extends AppCompatActivity {
     DocumentReference documentReference;
     Bundle bundle;
     public static String selectedShop;
+    RelativeLayout relativeLayoutLoading;
+    LottieAnimationView lottieAnimationViewMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
 
-        btnBack=findViewById(R.id.btn_back);
-        recyclerView=findViewById(R.id.item_recycler);
-        bundle=getIntent().getExtras();
+        btnBack = findViewById(R.id.btn_back);
+        recyclerView = findViewById(R.id.item_recycler);
+        relativeLayoutLoading = findViewById(R.id.relative_loading);
+        lottieAnimationViewMain = findViewById(R.id.loading_animation);
+        bundle = getIntent().getExtras();
 
-        selectedShop=bundle.getString("shopId");
+        selectedShop = bundle.getString("shopId");
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         documentReference = firebaseFirestore.collection("ShopsMain").document(Objects.requireNonNull(bundle.getString("shopId")));
@@ -50,6 +57,9 @@ public class ItemListActivity extends AppCompatActivity {
         recyclerView.setAdapter(itemAdapter);
         itemAdapter.notifyDataSetChanged();
         itemAdapter.startListening();
+
+        lottieAnimationViewMain.cancelAnimation();
+        relativeLayoutLoading.setVisibility(View.GONE);
 
         btnBack.setOnClickListener(view -> onBackPressed());
 

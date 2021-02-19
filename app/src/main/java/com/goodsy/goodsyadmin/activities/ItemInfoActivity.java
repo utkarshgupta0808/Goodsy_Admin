@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -41,6 +43,8 @@ public class ItemInfoActivity extends AppCompatActivity {
     private final String URL = "https://fcm.googleapis.com/fcm/send";
     private RequestQueue mRequestQue;
     String token;
+    RelativeLayout relativeLayoutLoading;
+    LottieAnimationView lottieAnimationViewMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,8 @@ public class ItemInfoActivity extends AppCompatActivity {
         rejectItem = findViewById(R.id.reject_item);
         rejectReason = findViewById(R.id.reject_reason);
         btnRejectReason = findViewById(R.id.btn_reject_reason);
+        relativeLayoutLoading = findViewById(R.id.relative_loading);
+        lottieAnimationViewMain = findViewById(R.id.loading_animation);
 
         bundle = getIntent().getExtras();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -85,6 +91,8 @@ public class ItemInfoActivity extends AppCompatActivity {
             startActivity(new Intent(ItemInfoActivity.this, PhotoPreviewActivity.class).putExtras(bundle1));
         });
 
+        lottieAnimationViewMain.cancelAnimation();
+        relativeLayoutLoading.setVisibility(View.GONE);
         acceptItem.setOnClickListener(view -> {
             final LayoutInflater layoutInflater = LayoutInflater.from(ItemInfoActivity.this);
             View view1 = layoutInflater.inflate(R.layout.alert_dialog, null);

@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.goodsy.goodsyadmin.R;
 import com.google.firebase.firestore.DocumentReference;
@@ -27,6 +29,8 @@ public class ShopInfoActivity extends AppCompatActivity {
     Button acceptShop, rejectShop;
     FirebaseFirestore firebaseFirestore;
     DocumentReference documentReference;
+    RelativeLayout relativeLayoutLoading;
+    LottieAnimationView lottieAnimationViewMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class ShopInfoActivity extends AppCompatActivity {
         panCard = findViewById(R.id.pan_card);
         acceptShop = findViewById(R.id.accept_shop);
         rejectShop = findViewById(R.id.reject_shop);
+        relativeLayoutLoading = findViewById(R.id.relative_loading);
+        lottieAnimationViewMain = findViewById(R.id.loading_animation);
 
         bundle = getIntent().getExtras();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -118,6 +124,10 @@ public class ShopInfoActivity extends AppCompatActivity {
             bundle1.putString("photoDes", "Gst Certificate");
             startActivity(new Intent(ShopInfoActivity.this, PhotoPreviewActivity.class).putExtras(bundle1));
         });
+
+
+        lottieAnimationViewMain.cancelAnimation();
+        relativeLayoutLoading.setVisibility(View.GONE);
 
         acceptShop.setOnClickListener(view -> {
 

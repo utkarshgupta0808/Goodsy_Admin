@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.goodsy.goodsyadmin.R;
 import com.goodsy.goodsyadmin.utils.Constants;
@@ -29,6 +32,9 @@ public class WelcomeActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     public static String adminDeviceToken;
     FirebaseFirestore firebaseFirestore;
+    RelativeLayout relativeLayoutLoading;
+    LottieAnimationView lottieAnimationViewMain;
+    NestedScrollView nestedScrollViewMain;
     CardView shopList, itemList, shopAcceptedList, shopRejectedList, addDefaultImages, addDefaultItems, allDeliveryBoys, newDeliverBoys;
     ImageView btnLogout, imageViewChat, imageViewTokenUpdate;
     ImageView imageViewOne, imageViewTwo, imageViewThird, imageViewFourth, imageViewFive, imageViewSix, imageViewSeven, imageViewEight, imageViewNine, imageViewTen, imageViewEleven, imageViewTwelve;
@@ -63,6 +69,9 @@ public class WelcomeActivity extends AppCompatActivity {
         imageViewTen = findViewById(R.id.image_ten);
         imageViewEleven = findViewById(R.id.image_eleven);
         imageViewTwelve = findViewById(R.id.image_twelve);
+        relativeLayoutLoading = findViewById(R.id.relative_loading);
+        lottieAnimationViewMain = findViewById(R.id.loading_animation);
+        nestedScrollViewMain = findViewById(R.id.nested_main);
 
         Glide.with(WelcomeActivity.this).load(Constants.linkVeniceGradient).placeholder(R.drawable.loading_photo).into(imageViewOne);
         Glide.with(WelcomeActivity.this).load(Constants.linkAzureLaneGradient).placeholder(R.drawable.loading_photo).into(imageViewTwo);
@@ -133,6 +142,9 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         }));
 
+        nestedScrollViewMain.setVisibility(View.VISIBLE);
+        lottieAnimationViewMain.cancelAnimation();
+        relativeLayoutLoading.setVisibility(View.GONE);
     }
 
     private void logOut() {

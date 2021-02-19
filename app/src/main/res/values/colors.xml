@@ -15,4 +15,8 @@
     <color name="editTextHintColor">#828797</color>
     <color name="iconColor">#464646</color>
     <color name="light_grey">#D3D3D3</color>
+
+
+    <color name="splashBackground">#2196F3</color>
+    <color name="activityBack">#F8F8F8</color>
 </resources>

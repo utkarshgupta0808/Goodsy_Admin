@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.goodsy.goodsyadmin.R;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,6 +30,8 @@ public class DeliveryBoyInfoActivity extends AppCompatActivity {
     Button acceptShop, rejectShop;
     FirebaseFirestore firebaseFirestore;
     DocumentReference documentReference;
+    RelativeLayout relativeLayoutLoading;
+    LottieAnimationView lottieAnimationViewMain;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -57,6 +61,8 @@ public class DeliveryBoyInfoActivity extends AppCompatActivity {
         cheque = findViewById(R.id.cheque);
         acceptShop = findViewById(R.id.accept_shop);
         rejectShop = findViewById(R.id.reject_shop);
+        relativeLayoutLoading = findViewById(R.id.relative_loading);
+        lottieAnimationViewMain = findViewById(R.id.loading_animation);
 
         bundle = getIntent().getExtras();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -94,7 +100,8 @@ public class DeliveryBoyInfoActivity extends AppCompatActivity {
             Glide.with(DeliveryBoyInfoActivity.this).load(documentSnapshot.getString("panCard")).into(panCard);
             Glide.with(DeliveryBoyInfoActivity.this).load(documentSnapshot.getString("dl")).into(dl);
             Glide.with(DeliveryBoyInfoActivity.this).load(documentSnapshot.getString("marksheet")).into(marksheet);
-
+            lottieAnimationViewMain.cancelAnimation();
+            relativeLayoutLoading.setVisibility(View.GONE);
         }).addOnFailureListener(e -> {
         });
 
